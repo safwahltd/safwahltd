@@ -18,7 +18,6 @@ class CoreValueController extends Controller
         try{
             $validate = Validator::make($request->all(),[
                 'title' => 'required',
-                'serial' => 'required',
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());
@@ -46,6 +45,10 @@ class CoreValueController extends Controller
                     $core->serial = $coreCount + 1;
                 }
             }
+            else{
+                $coreCount = CoreValue::count();
+                $core->serial = $coreCount + 1;
+            }
 
             $core->status = $request->status;
             $core->save();
@@ -61,7 +64,6 @@ class CoreValueController extends Controller
         try{
             $validate = Validator::make($request->all(),[
                 'title' => 'required',
-                'serial' => 'required',
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());

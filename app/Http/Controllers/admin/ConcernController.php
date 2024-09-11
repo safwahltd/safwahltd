@@ -18,7 +18,6 @@ class ConcernController extends Controller
         try{
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
-                'serial' => 'required',
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());
@@ -46,6 +45,10 @@ class ConcernController extends Controller
                     $concern->serial = $concernCount + 1;
                 }
             }
+            else{
+                $concernCount = Concern::count();
+                $concern->serial = $concernCount + 1;
+            }
             $concern->url = $request->url;
             $concern->status = $request->status;
             $concern->save();
@@ -61,7 +64,6 @@ class ConcernController extends Controller
         try{
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
-                'serial' => 'required',
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());
