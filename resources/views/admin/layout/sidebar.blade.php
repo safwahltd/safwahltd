@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('admin.product.index')}}">
                         <i class="side-menu__icon fa fa-solid fa-product-hunt"></i>
                         <span class="side-menu__label">Product</span>
                     </a>

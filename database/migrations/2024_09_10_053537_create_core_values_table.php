@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('icon')->nullable();
             $table->integer('serial')->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

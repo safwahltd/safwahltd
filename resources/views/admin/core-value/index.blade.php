@@ -1,23 +1,13 @@
 @extends('admin.layout.app')
 @section('title','Core Values')
 @section('body')
-    <div class="page-header">
-        <div>
-            <h1 class="page-title">Core Values</h1>
-        </div>
-        <div class="ms-auto pageheader-btn">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Core Values</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Core Values</li>
-            </ol>
-        </div>
-    </div>
-    <div class="row row-sm">
+    <div class="row mt-1 row-sm">
         <div class="col-lg-12">
             <div class="card">
                 <div class="border-bottom m-3">
                     <div class="row">
-                        <div class="card-header border-bottom justify-content-end">
+                        <div class="card-header border-bottom justify-content-between">
+                            <h3 class="card-title">Core Values</h3>
                             <a class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#addCoreValue" href="">
                                 ADD <i class="fa fa-plus"></i>
                             </a>
@@ -146,7 +136,7 @@
                                                                     <img src="{{asset($coreValue->icon)}}" class="img-fluid img-responsive my-2" width="150" height="150" alt="">
                                                                     <span class="text-danger">{{$errors->has('logo') ? $errors->first('logo'):''}}</span>
                                                                 </div>
-                                                            </div>
+                                                        </div>
                                                         <div class="row mb-4">
                                                                 <label for="serialshow" class="col-md-3 form-label">Serial</label>
                                                                 <div class="col-md-9">

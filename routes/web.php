@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\CoreValueController;
 use App\Http\Controllers\admin\ConcernController;
+use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ArticleController;
 
 
 Route::get('/',[DashboardController::class,'index'])->name('admin.dashboard');
@@ -19,4 +21,12 @@ Route::controller(ConcernController::class)->group(function (){
     Route::put('/concern-update/{id}','update')->name('admin.concern.update');
     Route::delete('/concern-destroy/{id}','destroy')->name('admin.concern.destroy');
 });
+Route::controller(ProductController::class)->group(function (){
+    Route::get('/product','index')->name('admin.product.index');
+    Route::post('/product-store','store')->name('admin.product.store');
+    Route::put('/product-update/{id}','update')->name('admin.product.update');
+    Route::delete('/product-destroy/{id}','destroy')->name('admin.product.destroy');
+});
+
+
 
