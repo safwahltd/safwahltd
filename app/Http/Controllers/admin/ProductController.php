@@ -11,10 +11,18 @@ use Exception;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::orderBy('serial','ASC')->paginate(20);
-        return view('admin.product.index',compact('products'));
+        if(auth()->user()->hasPermission('admin product index')){
+            $products = Product::orderBy('serial','ASC')->paginate(20);
+            return view('admin.product.index',compact('products'));
+        }
+        else{
+            toastr()->error('You Have No Permission.');
+            return back();
+        }
+
     }
     public function store(Request $request){
+        if(auth()->user()->hasPermission('admin product store')){
         try{
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
@@ -69,8 +77,14 @@ class ProductController extends Controller
             toastr()->error($e->getMessage());
             return back();
         }
+        }
+        else{
+            toastr()->error('You Have No Permission.');
+            return back();
+        }
     }
     public function update(Request $request,$id){
+        if(auth()->user()->hasPermission('admin product update')){
         try{
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
@@ -129,8 +143,14 @@ class ProductController extends Controller
             toastr()->error($e->getMessage());
             return back();
         }
+        }
+        else{
+            toastr()->error('You Have No Permission.');
+            return back();
+        }
     }
     public function destroy($id){
+        if(auth()->user()->hasPermission('admin product destroy')){
         try{
             $product = Product::find($id);
             if (file_exists($product->banner)){
@@ -146,6 +166,11 @@ class ProductController extends Controller
         }
         catch(Exception $e){
             toastr()->error($e->getMessage());
+            return back();
+        }
+        }
+        else{
+            toastr()->error('You Have No Permission.');
             return back();
         }
 

@@ -152,7 +152,7 @@
                                         </svg>
                                         Profile
                                     </a>
-                                    <form class="dropdown-item" action="{{--{{ route('admin.logout') }}--}}" method="post">
+                                    <form class="dropdown-item" action="{{ route('admin.logout') }}" method="post">
                                         @csrf
                                         <button type="submit" onclick="return confirm('are you sure to logout ?')"
                                                 class="dropdown-item">Logout</button>

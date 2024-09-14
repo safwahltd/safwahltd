@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title','Concern')
+@section('title','Shops')
 @section('body')
     <div class="row mt-1 row-sm">
         <div class="col-lg-12">
@@ -7,7 +7,7 @@
                 <div class="border-bottom m-3">
                     <div class="row">
                         <div class="card-header border-bottom justify-content-between">
-                            <h3 class="card-title">Concern</h3>
+                            <h3 class="card-title">Shops</h3>
                             <a class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#addConcern" href="">
                                 ADD <i class="fa fa-plus"></i>
                             </a>

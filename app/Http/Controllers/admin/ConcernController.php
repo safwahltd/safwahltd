@@ -11,10 +11,17 @@ use Exception;
 class ConcernController extends Controller
 {
     public function index(){
+        if(auth()->user()->hasPermission('admin concern index')){
         $concerns = Concern::orderBy('serial','ASC')->paginate(20);
         return view('admin.concern.index',compact('concerns'));
+        }
+        else{
+            toastr()->error('You Have No Permission.');
+            return back();
+        }
     }
     public function store(Request $request){
+        if(auth()->user()->hasPermission('admin concern store')){
         try{
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
@@ -59,8 +66,14 @@ class ConcernController extends Controller
             toastr()->error($e->getMessage());
             return back();
         }
+        }
+        else{
+            toastr()->error('You Have No Permission.');
+            return back();
+        }
     }
     public function update(Request $request,$id){
+        if(auth()->user()->hasPermission('admin concern update')){
         try{
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
@@ -107,8 +120,14 @@ class ConcernController extends Controller
             toastr()->error($e->getMessage());
             return back();
         }
+        }
+        else{
+            toastr()->error('You Have No Permission.');
+            return back();
+        }
     }
     public function destroy($id){
+        if(auth()->user()->hasPermission('admin concern destroy')){
         try{
             $concern = Concern::find($id);
             if (file_exists($concern->banner)){
@@ -120,6 +139,11 @@ class ConcernController extends Controller
         }
         catch(Exception $e){
             toastr()->error($e->getMessage());
+            return back();
+        }
+        }
+        else{
+            toastr()->error('You Have No Permission.');
             return back();
         }
 

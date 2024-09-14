@@ -33,6 +33,7 @@
                         <span class="side-menu__label">Dashboard</span>
                     </a>
                 </li>
+                @if(auth()->user()->hasPermission('admin core value index'))
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('admin.core.value.index')}}">
                         {{--<svg xmlns="http://www.w3.org/2000/svg" class=""
@@ -43,36 +44,45 @@
                         <span class="side-menu__label">Core Values</span>
                     </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasPermission('admin concern index'))
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('admin.concern.index')}}">
                         <i class="side-menu__icon fa fa-solid fa-c"></i>
                         <span class="side-menu__label">Concerns</span>
                     </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasPermission('admin product index'))
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('admin.product.index')}}">
                         <i class="side-menu__icon fa fa-solid fa-product-hunt"></i>
                         <span class="side-menu__label">Product</span>
                     </a>
                 </li>
+                @endif
+                @if(auth()->user()->hasPermission('admin article index'))
                 <li class="slide">
-                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('admin.article.index')}}">
                         <i class="side-menu__icon fa fa-regular fa-newspaper"></i>
                         <span class="side-menu__label">Articles</span>
                     </a>
                 </li>
+                @endif
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="">
                         <i class="side-menu__icon fa fa-shop"></i>
                         <span class="side-menu__label">Available Shop</span>
                     </a>
                 </li>
+
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="">
                         <i class="side-menu__icon fa-solid fa-address-book"></i>
                         <span class="side-menu__label">Contacts</span>
                     </a>
                 </li>
+{{--                @if(auth()->user()->hasPermission('admin user index'))--}}
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="#">
                         <i class="side-menu__icon fa-solid fa-gear"></i>
@@ -80,10 +90,31 @@
                     </a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="">Company Setting</a></li>
-                        <li><a href="{{--{{route('user.index')}}--}}" class="slide-item">Email Setting</a></li>
-                        <li><a href="{{--{{route('user.index')}}--}}" class="slide-item">CMS Setting</a></li>
+                        <li><a href="{{route('admin.dashboard')}}" class="slide-item">Email Setting</a></li>
+                        <li><a href="{{route('admin.dashboard')}}" class="slide-item">CMS Setting</a></li>
                     </ul>
                 </li>
+{{--                @endif--}}
+                @if(auth()->user()->hasPermission('admin user index') || auth()->user()->hasPermission('admin role index') || auth()->user()->hasPermission('admin permission index'))
+                    <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                            <i class="side-menu__icon fa-solid fa-gear"></i>
+                            <span class="side-menu__label">User & Access</span><i class="angle fa fa-angle-right"></i>
+                        </a>
+                        <ul class="slide-menu">
+                            <li class="side-menu-label1"><a href="">User & Access</a></li>
+                            @if(auth()->user()->hasPermission('admin user index'))
+                            <li><a href="{{route('admin.user.index')}}" class="slide-item">users</a></li>
+                            @endif
+                            @if(auth()->user()->hasPermission('admin role index'))
+                                <li><a href="{{route('admin.role.index')}}" class="slide-item">Role</a></li>
+                            @endif
+                            @if(auth()->user()->hasPermission('admin permission index'))
+                                <li><a href="{{route('admin.permission.index')}}" class="slide-item">Permission</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                    @endif
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                                                            width="24" height="24" viewBox="0 0 24 24">
