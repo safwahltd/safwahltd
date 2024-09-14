@@ -6,140 +6,153 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Exception;
 
 class ArticleController extends Controller
 {
     public function index(){
-        $products = Article::orderBy('serial','ASC')->paginate(20);
-        return view('admin.product.index',compact('products'));
+        if(auth()->user()->hasPermission('admin article index')){
+            $articles = Article::orderBy('serial','ASC')->paginate(20);
+            return view('admin.article.index',compact('articles'));
+        }
+        else{
+            toastr()->error('You Have No Permission.');
+            return back();
+        }
     }
     public function store(Request $request){
+        if(auth()->user()->hasPermission('admin article store')){
         try{
             $validate = Validator::make($request->all(),[
-                'name' => 'required',
+                'title' => 'required|string|max:255',
+                'slug' => ['required', 'string', 'max:255']
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());
                 return back();
             }
-            $product = new Product();
-            $product->name = $request->name;
-            if ($request->file('banner')){
-                $banner = $request->file('banner');
-                $bannerName = $banner->getClientOriginalName();
-                $directory = 'upload/product/banner/';
-                $banner->move($directory,$bannerName);
-                $bannerUrl = $directory.$bannerName;
-                $product->banner = $bannerUrl;
-            }
-            if ($request->file('icon')){
-                $icon = $request->file('icon');
-                $iconName = $icon->getClientOriginalName();
-                $directory = 'upload/product/icon/';
-                $icon->move($directory,$iconName);
-                $iconUrl = $directory.$iconName;
-                $product->icon = $iconUrl;
-            }
+            // Use the helper function to generate a unique slug
+            $slug = createUniqueSlug($request->title, Article::class);
 
+            $article = new Article();
+            $article->title = $request->title;
+            $article->slug = $slug;
+            $article->short_description = $request->short_description;
+            $article->long_description = $request->long_description;
+            if ($request->file('thumbnail')){
+                $thumbnail = $request->file('thumbnail');
+                $thumbnailName = $thumbnail->getClientOriginalName();
+                $directory = 'upload/article/';
+                $thumbnail->move($directory,$thumbnailName);
+                $thumbnailUrl = $directory.$thumbnailName;
+                $article->thumbnail = $thumbnailUrl;
+            }
             if ($request->serial){
-                $productCount = Product::count();
-                $productSerial = Product::where('serial',$request->serial)->first();
-                if ($productSerial){
-                    $productSerial->serial = $productCount + 1;
-                    $productSerial->save();
-                    $product->serial = $request->serial;
+                $articleCount = Article::count();
+                $articleSerial = Article::where('serial',$request->serial)->first();
+                if ($articleSerial){
+                    $articleSerial->serial = $articleCount + 1;
+                    $articleSerial->save();
+                    $article->serial = $request->serial;
                 }
                 else{
-                    $product->serial = $productCount + 1;
+                    $article->serial = $articleCount + 1;
                 }
             }
             else{
-                $productCount = Product::count();
-                $product->serial = $productCount + 1;
+                $articleCount = Article::count();
+                $article->serial = $articleCount + 1;
             }
 
-            $product->url = $request->url;
-            $product->status = $request->status;
-            $product->save();
-            toastr()->success('product Create Successfully.');
+            $article->url = $request->url;
+            $article->status = $request->status;
+            $article->save();
+            toastr()->success('Article Create Successfully.');
             return back();
         }
         catch(Exception $e){
             toastr()->error($e->getMessage());
+            return back();
+        }
+        }
+        else{
+            toastr()->error('You Have No Permission.');
             return back();
         }
     }
     public function update(Request $request,$id){
+        if(auth()->user()->hasPermission('admin article update')){
         try{
+            $article = Article::find($id);
             $validate = Validator::make($request->all(),[
-                'name' => 'required',
+                'title' => 'required',
+                'slug' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('articles')->ignore($article->id)
+                ]
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());
                 return back();
             }
-            $product = Product::find($id);
-            $product->name = $request->name;
-            if ($request->file('banner')){
-                if (file_exists($product->banner)){
-                    unlink($product->banner);
-                }
-                $banner = $request->file('banner');
-                $bannerName = $banner->getClientOriginalName();
-                $directory = 'upload/product/banner/';
-                $banner->move($directory,$bannerName);
-                $bannerUrl = $directory.$bannerName;
-                $product->banner = $bannerUrl;
-            }
-            if ($request->file('icon')){
-                if (file_exists($product->icon)){
-                    unlink($product->icon);
-                }
-                $icon = $request->file('icon');
-                $iconName = $icon->getClientOriginalName();
-                $directory = 'upload/product/icon/';
-                $icon->move($directory,$iconName);
-                $iconUrl = $directory.$iconName;
-                $product->icon = $iconUrl;
-            }
 
-            if ($request->serial == $product->serial){
-                $product->serial = $request->serial;
+            $article->title = $request->title;
+            $article->slug = createUniqueSlug($request->title, Article::class);
+            $article->short_description = $request->short_description;
+            $article->long_description = $request->long_description;
+            if ($request->file('thumbnail')){
+                if (file_exists($article->thumbnail)){
+                    unlink($article->thumbnail);
+                }
+                $thumbnail = $request->file('thumbnail');
+                $thumbnailName = $thumbnail->getClientOriginalName();
+                $directory = 'upload/product/thumbnail/';
+                $thumbnail->move($directory,$thumbnailName);
+                $thumbnailUrl = $directory.$thumbnailName;
+                $article->thumbnail = $thumbnailUrl;
+            }
+            if ($request->serial == $article->serial){
+                $article->serial = $request->serial;
             }
             else{
-                $productCount = Product::count();
-                $productSerial = Product::where('serial',$request->serial)->first();
-                if ($productSerial){
-                    $productSerial->serial = $product->serial;
-                    $productSerial->save();
-                    $product->serial = $request->serial;
+                $articleCount = Article::count();
+                $articleSerial = Article::where('serial',$request->serial)->first();
+                if ($articleSerial){
+                    $articleSerial->serial = $article->serial;
+                    $articleSerial->save();
+                    $article->serial = $request->serial;
                 }
                 else{
-                    $product->serial = $request->serial;
+                    $article->serial = $request->serial;
                 }
             }
-            $product->url = $request->url;
-            $product->status = $request->status;
-            $product->save();
-            toastr()->success('product Update Successfully.');
+            $article->url = $request->url;
+            $article->status = $request->status;
+            $article->save();
+            toastr()->success('Article Update Successfully.');
             return back();
         }
         catch(Exception $e){
             toastr()->error($e->getMessage());
             return back();
         }
+        }
+        else{
+            toastr()->error('You Have No Permission.');
+            return back();
+        }
     }
     public function destroy($id){
+        if(auth()->user()->hasPermission('admin article destroy')){
         try{
-            $product = Product::find($id);
-            if (file_exists($product->banner)){
-                unlink($product->banner);
+            $article = Article::find($id);
+            if (file_exists($article->thumbnail)){
+                unlink($article->thumbnail);
             }
-            if (file_exists($product->icon)){
-                unlink($product->icon);
-            }
-
-            $product->delete();
+            $article->delete();
             toastr()->success('product Delete Successfully.');
             return back();
         }
@@ -147,7 +160,11 @@ class ArticleController extends Controller
             toastr()->error($e->getMessage());
             return back();
         }
-
+        }
+        else{
+            toastr()->error('You Have No Permission.');
+            return back();
+        }
     }
 
 }
