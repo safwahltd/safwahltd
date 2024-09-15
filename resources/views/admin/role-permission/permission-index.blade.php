@@ -72,8 +72,9 @@
                                                         <h3 class="card-title"><i class="fa fa-role-circle-o"></i> Create permission</h3>
                                                     </div>
                                                     <div class="card-body">
-                                                        <form class="form-horizontal" action="{{route('admin.permission.store')}}" method="post" enctype="multipart/form-data">
+                                                        <form class="form-horizontal" action="{{route('admin.permission.update',$permission->id)}}" method="post" enctype="multipart/form-data">
                                                             @csrf
+                                                            @method('PUT')
                                                             <div class="row mb-4">
                                                                 <label for="name" class="col-md-3 form-label">Name <span class="text-danger">*</span></label>
                                                                 <div class="col-md-9">

@@ -67,12 +67,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="card">
-                                                    <div class="card-header border-bottom justify-content-between">
-                                                        <h3 class="card-title"><i class="fa fa-role-circle-o"></i> Update role</h3>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <form class="form-horizontal" action="{{route('admin.role.update',$role->id)}}" method="post" enctype="multipart/form-data">
+                                                <form class="form-horizontal" action="{{route('admin.role.update',$role->id)}}" method="post" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="row mb-4">
@@ -113,8 +108,6 @@
 
                                                             <button class="btn btn-primary float-end" type="submit">Submit</button>
                                                         </form>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

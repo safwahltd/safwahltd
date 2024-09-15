@@ -9,6 +9,8 @@ use App\Http\Controllers\admin\ArticleController;
 use App\Http\Controllers\admin\AdminAuthController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\RolePermissionController;
+use App\Http\Controllers\admin\AvailableShopController;
+use App\Http\Controllers\admin\SettingController;
 
 
 Route::get('/',[AdminAuthController::class,'login'])->name('admin.login');
@@ -59,8 +61,18 @@ Route::middleware(['admin.auth'])->prefix('admin/')->group(function () {
         Route::delete('/permission-destroy/{id}','permissionDestroy')->name('admin.permission.destroy');
 
     });
-    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+    Route::controller(AvailableShopController::class)->group(function (){
+        Route::get('/shop','index')->name('admin.shop.index');
+        Route::post('/shop-store','store')->name('admin.shop.store');
+        Route::put('/shop-update/{id}','update')->name('admin.shop.update');
+        Route::delete('/shop-destroy/{id}','destroy')->name('admin.shop.destroy');
+    });
+    Route::get('/company-setting',[SettingController::class,'companySetting'])->name('admin.company.setting.index');
+    Route::put('/company-setting-update/{id}',[SettingController::class,'companySettingUpdate'])->name('admin.company.setting.update');
+    Route::get('/email-setting',[SettingController::class,'emailSetting'])->name('admin.email.setting.index');
+    Route::put('/email-setting-update/{id}',[SettingController::class,'emailSettingUpdate'])->name('admin.email.setting.update');
 
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 });
 
 

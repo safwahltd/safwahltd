@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Validation\Rule;
 
 class RolePermissionController extends Controller
 {
@@ -126,7 +127,10 @@ class RolePermissionController extends Controller
     public function permissionUpdate(Request $request,$id){
         try{
             $validate = Validator::make($request->all(),[
-                'name' => 'required',
+                'name' => [
+                    'required',
+                    Rule::unique('permissions','name')->ignore($id)
+                ],
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());

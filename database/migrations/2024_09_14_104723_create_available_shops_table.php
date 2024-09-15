@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('available_shops', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('banner')->nullable();
+            $table->text('url')->nullable();
+            $table->bigInteger('serial')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

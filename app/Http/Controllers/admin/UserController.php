@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function index(){
         if(auth()->user()->hasPermission('admin user index')){
-            $users = User::latest()->whereNotIn('id',[1])->paginate(20);
+            $users = User::latest()->whereNotIn('id',[1,auth()->user()->id])->paginate(20);
             $roles = Role::where('status',1)->get();
             return view('admin.user.index',compact('users','roles'));
         }

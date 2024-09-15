@@ -60,8 +60,10 @@ class User extends Authenticatable
         $user_Roles = UserRole::where('user_id',auth()->user()->id)->get();
         foreach ($user_Roles as $user_Role) {
             foreach ($user_Role->rolePermission as $permit){
-                if ($permit->permission->name == $permission){
-                    return true;
+                if ($permit->permission->status == 1){
+                    if ($permit->permission->name == $permission){
+                        return true;
+                    }
                 }
             }
         }
