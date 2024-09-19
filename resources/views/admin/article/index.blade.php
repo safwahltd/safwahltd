@@ -81,7 +81,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mb-4">
-                                                                    <label for="{{$key}}" class="col-md-3 form-label">thumbnail</label>
+                                                                    <label for="{{$key}}" class="col-md-3 form-label">thumbnail <small class="text-danger">(550 x 350)</small></label>
                                                                     <div class="col-md-9">
                                                                         <input class="form-control image-input" value="" id="{{$key}}" name="thumbnail" type="file">
                                                                         <img class="img-fluid img-responsive my-2" id="imagePreview-{{$key}}" src="{{asset($article->thumbnail)}}" alt="Your Image" style="width: 150px; height: auto;" />
@@ -224,7 +224,7 @@
                                 </div>
                                 @php($rand = rand(0,10))
                                 <div class="row mb-4">
-                                    <label for="thumbnailAdd" class="col-md-3 form-label">thumbnail</label>
+                                    <label for="thumbnailAdd" class="col-md-3 form-label">thumbnail <small class="text-danger">(550 x 350)</small></label>
                                     <div class="col-md-9">
                                         <input class="form-control image-input" value="{{old('thumbnail')}}" id="{{$rand}}" name="thumbnail" type="file">
                                         <img class="img-fluid img-responsive my-2" id="imagePreview-{{$rand}}" src="" alt="Your Image" style="width: 150px; height: auto;" />

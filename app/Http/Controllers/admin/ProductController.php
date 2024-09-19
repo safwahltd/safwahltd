@@ -26,6 +26,11 @@ class ProductController extends Controller
         try{
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
+                "banner" => [
+                    'image',
+                    'mimes:jpg,png,jpeg,gif,svg,webp',
+                    'dimensions:min_width=2560,min_height=2560,max_width=2560,max_height=2560',
+                ],
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());
@@ -88,6 +93,11 @@ class ProductController extends Controller
         try{
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
+                "banner"         => [
+                    'image',
+                    'mimes:jpg,png,jpeg,gif,svg,webp',
+                    'dimensions:min_width=2560,min_height=2560,max_width=2560,max_height=2560'
+                ],
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());
@@ -159,7 +169,6 @@ class ProductController extends Controller
             if (file_exists($product->icon)){
                 unlink($product->icon);
             }
-
             $product->delete();
             toastr()->success('product Delete Successfully.');
             return back();

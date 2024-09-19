@@ -25,6 +25,11 @@ class CoreValueController extends Controller
             try{
                 $validate = Validator::make($request->all(),[
                     'title' => 'required',
+                    "icon"         => [
+                        'image',
+                        'mimes:jpg,png,jpeg,gif,svg,webp',
+                        'dimensions:min_width=500,min_height=450,max_width=500,max_height=450'
+                    ],
                 ]);
                 if($validate->fails()){
                     toastr()->error($validate->messages());
@@ -77,6 +82,11 @@ class CoreValueController extends Controller
             try{
                 $validate = Validator::make($request->all(),[
                     'title' => 'required',
+                    "icon"         => [
+                        'image',
+                        'mimes:jpg,png,jpeg,gif,svg,webp',
+                        'dimensions:min_width=500,min_height=450,max_width=500,max_height=450'
+                    ],
                 ]);
                 if($validate->fails()){
                     toastr()->error($validate->messages());

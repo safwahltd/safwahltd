@@ -7,7 +7,7 @@
                      alt="logo">
                 <img src="{{asset($company->favicon)}}" class="header-brand-img toggle-logo"
                      alt="logo">
-                <img src="{{asset($company->logo)}}" class="header-brand-img light-logo"
+                <img src="{{asset($company->favicon)}}" class="header-brand-img light-logo"
                      alt="logo">
                 <img src="{{asset($company->logo)}}" class="header-brand-img light-logo1"
                      alt="logo">
@@ -53,6 +53,15 @@
                     </a>
                 </li>
                 @endif
+                @if(auth()->user()->hasPermission('admin mission index'))
+                <li class="slide">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('admin.mission.index')}}">
+                        <i class="side-menu__icon text-white fa fa-solid fa-m"></i>
+                        <span class="side-menu__label text-white">Mission & Vision</span>
+                    </a>
+                </li>
+                @endif
+
                 @if(auth()->user()->hasPermission('admin product index'))
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('admin.product.index')}}">
@@ -90,12 +99,29 @@
                     </a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)">Company Setting</a></li>
+                        @if(auth()->user()->hasPermission('admin social link index'))
+                        <li><a href="{{route('admin.social.link.index')}}" class="slide-item text-white">Social Link</a></li>
+                        @endif
+                        @if(auth()->user()->hasPermission('admin slider index'))
+                        <li><a href="{{route('admin.slider.index')}}" class="slide-item text-white">Sliders</a></li>
+                        @endif
+                        @if(auth()->user()->hasPermission('admin about index'))
+                        <li><a href="{{route('admin.about.index')}}" class="slide-item text-white">About Us</a></li>
+                        @endif
+                        @if(auth()->user()->hasPermission('admin topbar index'))
+                        <li><a href="{{route('admin.topbar.index')}}" class="slide-item text-white">Top Bar Text</a></li>
+                        @endif
                         @if(auth()->user()->hasPermission('admin company setting index'))
-                        <li><a href="{{route('admin.company.setting.index')}}" class="slide-item text-white">Company Setting</a></li>
+                            <li><a href="{{route('admin.company.setting.index')}}" class="slide-item text-white">Company Setting</a></li>
                         @endif
                         @if(auth()->user()->hasPermission('admin email setting index'))
-                        <li><a href="{{route('admin.email.setting.index')}}" class="slide-item text-white">Email Setting</a></li>
+                            <li><a href="{{route('admin.email.setting.index')}}" class="slide-item text-white">Email Setting</a></li>
                         @endif
+                        @if(auth()->user()->hasPermission('admin cms index'))
+                            <li><a href="{{route('admin.cms.index')}}" class="slide-item text-white">Website CMS</a></li>
+                        @endif
+
+
 {{--                        <li><a href="{{route('admin.dashboard')}}" class="slide-item text-white">CMS Setting</a></li>--}}
                     </ul>
                 </li>
