@@ -2,37 +2,29 @@
 @section('title','Home Page')
 @section('body')
     <!-- Carousel Start -->
+    @if($cms->slider == 1)
     <div class="container-fluid px-0">
         <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
-                <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+                @foreach($sliders as $key => $slider)
+                <li data-bs-target="#carouselId" data-bs-slide-to="{{$key}}" class="{{$key == 0 ? 'active':''}}" aria-current="true" aria-label="First slide"></li>
+                @endforeach
             </ol>
             <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    <img src="{{asset('/')}}website/img/carousel-1.jpg" class="img-fluid" alt="First slide">
+                @foreach($sliders as $key => $slider)
+                <div class="carousel-item {{$key == 0 ? 'active':''}}">
+                    <img src="{{asset($slider->banner)}}" class="img-fluid" alt="First slide">
                     <div class="carousel-caption">
                         <div class="container carousel-content">
-                            <h6 class="text-secondary h4 animated fadeInUp">Best IT Solutions</h6>
-                            <h1 class="text-white display-1 mb-4 animated fadeInRight">An Innovative IT Solutions Agency</h1>
-                            <p class="mb-4 text-white fs-5 animated fadeInDown">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Pellentesque aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="#" class="me-2"><button type="button" class="px-4 py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn1 animated fadeInLeft">Read More</button></a>
-                            <a href="#" class="ms-2"><button type="button" class="px-4 py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn2 animated fadeInRight">Contact Us</button></a>
+                            <h6 class="text-white h4 animated fadeInUp">{{ $slider->title }}</h6>
+                            <h3 class="text-white display-3 mb-4 animated fadeInRight">{{$slider->slogan}}</h3>
+                            <p class="mb-4 text-white fs-5 animated fadeInDown">{{$slider->description}}</p>
+                            <a href="{{$slider->url}}" class="mx-2"><button type="button" class="px-4 my-2 text-white py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn1 animated fadeInLeft">Read More</button></a>
+                            <a href="{{route('website.contact')}}" class="mx-2"><button type="button" class="px-4 py-sm-3 px-sm-5 btn btn-primary text-white rounded-pill carousel-content-btn2 animated fadeInRight">Contact Us</button></a>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="{{asset('/')}}website/img/carousel-2.jpg" class="img-fluid" alt="Second slide">
-                    <div class="carousel-caption">
-                        <div class="container carousel-content">
-                            <h6 class="text-secondary h4 animated fadeInUp">Best IT Solutions</h6>
-                            <h1 class="text-white display-1 mb-4 animated fadeInLeft">Quality Digital Services You Really Need!</h1>
-                            <p class="mb-4 text-white fs-5 animated fadeInDown">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Pellentesque aliquam dolor eget urna ultricies tincidunt.</p>
-                            <a href="#" class="me-2"><button type="button" class="px-4 py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn1 animated fadeInLeft">Read More</button></a>
-                            <a href="#" class="ms-2"><button type="button" class="px-4 py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn2 animated fadeInRight">Contact Us</button></a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -44,608 +36,288 @@
             </button>
         </div>
     </div>
+    @endif
     <!-- Carousel End -->
 
-    <!-- Fact Start -->
-    <div class="container-fluid bg-secondary py-5">
+    {{--<!-- Fact Start -->
+    <div class="container-fluid bg-dark py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 wow fadeIn" data-wow-delay=".1s">
                     <div class="d-flex counter">
-                        <h1 class="me-3 text-primary counter-value">99</h1>
+                        <h1 class="me-3 text-dark counter-value">99</h1>
                         <h5 class="text-white mt-1">Success in getting happy customer</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 wow fadeIn" data-wow-delay=".3s">
                     <div class="d-flex counter">
-                        <h1 class="me-3 text-primary counter-value">25</h1>
+                        <h1 class="me-3 text-dark counter-value">25</h1>
                         <h5 class="text-white mt-1">Thousands of successful business</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 wow fadeIn" data-wow-delay=".5s">
                     <div class="d-flex counter">
-                        <h1 class="me-3 text-primary counter-value">120</h1>
+                        <h1 class="me-3 text-dark counter-value">120</h1>
                         <h5 class="text-white mt-1">Total clients who love HighTech</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 wow fadeIn" data-wow-delay=".7s">
                     <div class="d-flex counter">
-                        <h1 class="me-3 text-primary counter-value">5</h1>
+                        <h1 class="me-3 text-dark counter-value">5</h1>
                         <h5 class="text-white mt-1">Stars reviews given by satisfied clients</h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Fact End -->
-
+    <!-- Fact End -->--}}
     <!-- About Start -->
+    @if($about->status == 1)
     <div class="container-fluid py-5 my-5">
-        <div class="container pt-5">
+        <div class="container pt-5" id="about_us">
             <div class="row g-5">
                 <div class="col-lg-5 col-md-6 col-sm-12 wow fadeIn" data-wow-delay=".3s">
                     <div class="h-100 position-relative">
-                        <img src="{{asset('/')}}website/img/about-1.jpg" class="img-fluid w-75 rounded" alt="" style="margin-bottom: 25%;">
+                        <img src="{{asset($about->image_1)}}" class="img-fluid w-75 rounded" alt="" style="margin-bottom: 25%;">
                         <div class="position-absolute w-75" style="top: 25%; left: 25%;">
-                            <img src="{{asset('/')}}website/img/about-2.jpg" class="img-fluid w-100 rounded" alt="">
+                            <img src="{{asset($about->image_2)}}" class="img-fluid w-100 rounded" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-6 col-sm-12 wow fadeIn" data-wow-delay=".5s">
-                    <h5 class="text-primary">About Us</h5>
-                    <h1 class="mb-4">About HighTech Agency And It's Innovative IT Solutions</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur quis purus ut interdum. Pellentesque aliquam dolor eget urna ultricies tincidunt. Nam volutpat libero sit amet leo cursus, ac viverra eros tristique. Morbi quis quam mi. Cras vel gravida eros. Proin scelerisque quam nec elementum viverra. Suspendisse viverra hendrerit diam in tempus. Etiam gravida justo nec erat vestibulum, et malesuada augue laoreet.</p>
-                    <p class="mb-4">Pellentesque aliquam dolor eget urna ultricies tincidunt. Nam volutpat libero sit amet leo cursus, ac viverra eros tristique. Morbi quis quam mi. Cras vel gravida eros. Proin scelerisque quam nec elementum viverra. Suspendisse viverra hendrerit diam in tempus.</p>
-                    <a href="#" class="btn btn-secondary rounded-pill px-5 py-3 text-white">More Details</a>
+                    <h2 class="text-dark">About Us</h2>
+                    <h3 class="mb-4">{{$about->title}}</h3>
+                    <p>{!! $about->description !!}</p>
                 </div>
             </div>
         </div>
     </div>
+    @endif
     <!-- About End -->
 
-    <!-- Services Start -->
+    <!-- Core Value Start -->
     <div class="container-fluid services py-5 mb-5">
         <div class="container">
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
-                <h5 class="text-primary">Our Services</h5>
-                <h1>Services Built Specifically For Your Business</h1>
+                <h2 class="text-dark">Core Values</h2>
+{{--                <h1>Services Built Specifically For Your Business</h1>--}}
             </div>
             <div class="row g-5 services-inner">
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
-                    <div class="services-item bg-light">
-                        <div class="p-4 text-center services-content">
-                            <div class="services-content-icon">
-                                <i class="fa fa-code fa-7x mb-4 text-primary"></i>
-                                <h4 class="mb-3">Web Design</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Aliquam dolor eget urna ultricies tincidunt.</p>
-                                <a href="#" class="btn btn-secondary text-white px-5 py-3 rounded-pill">Read More</a>
+                @foreach($coreValues as $coreValue)
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay=".3s">
+                    <div class="services-item">
+                        <div class="text-center">
+                            <div class="">
+                                <img class="mb-2" src="{{asset($coreValue->icon)}}" width="250"  alt="">
+                                <h5 class="mb-3 p-2 text-dark">{{$coreValue->title}}</h5>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".5s">
-                    <div class="services-item bg-light">
-                        <div class="p-4 text-center services-content">
-                            <div class="services-content-icon">
-                                <i class="fa fa-file-code fa-7x mb-4 text-primary"></i>
-                                <h4 class="mb-3">Web Development</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Aliquam dolor eget urna ultricies tincidunt.</p>
-                                <a href="#" class="btn btn-secondary text-white px-5 py-3 rounded-pill">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".7s">
-                    <div class="services-item bg-light">
-                        <div class="p-4 text-center services-content">
-                            <div class="services-content-icon">
-                                <i class="fa fa-external-link-alt fa-7x mb-4 text-primary"></i>
-                                <h4 class="mb-3">UI/UX Design</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Aliquam dolor eget urna ultricies tincidunt.</p>
-                                <a href="#" class="btn btn-secondary text-white px-5 py-3 rounded-pill">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
-                    <div class="services-item bg-light">
-                        <div class="p-4 text-center services-content">
-                            <div class="services-content-icon">
-                                <i class="fas fa-user-secret fa-7x mb-4 text-primary"></i>
-                                <h4 class="mb-3">Web Cecurity</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Aliquam dolor eget urna ultricies tincidunt.</p>
-                                <a href="#" class="btn btn-secondary text-white px-5 py-3 rounded-pill">Read More</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".5s">
-                    <div class="services-item bg-light">
-                        <div class="p-4 text-center services-content">
-                            <div class="services-content-icon">
-                                <i class="fa fa-envelope-open fa-7x mb-4 text-primary"></i>
-                                <h4 class="mb-3">Digital Marketing</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Aliquam dolor eget urna ultricies tincidunt.</p>
-                                <a href="#" class="btn btn-secondary text-white px-5 py-3 rounded-pill">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".7s">
-                    <div class="services-item bg-light">
-                        <div class="p-4 text-center services-content">
-                            <div class="services-content-icon">
-                                <i class="fas fa-laptop fa-7x mb-4 text-primary"></i>
-                                <h4 class="mb-3">Programming</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Aliquam dolor eget urna ultricies tincidunt.</p>
-                                <a href="#" class="btn btn-secondary text-white px-5 py-3 rounded-pill">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
-    <!-- Services End -->
+    <!-- Core Value End -->
 
-    <!-- Project Start -->
+    <!-- Mission & Vision Start -->
+    <div class="container-fluid services py-5 mb-5" style="background-color: {{$cms->home_section_bg_color}}">
+        <div class="container">
+            <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
+                <h2 class="text-dark">Mission & Vision</h2>
+            </div>
+            <div class="row g-5 services-inner">
+                @foreach($missions as $mission)
+                    <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay=".3s">
+                        <div class="services-item bg-dark">
+                            <div class="text-center">
+                                <div class="">
+                                    <img class="mb-2" src="{{asset($mission->image)}}" width="250"  alt="">
+                                    <h5 class="mb-3 px-2 text-white">{{$mission->title}}</h5>
+                                    <p class="mb-3 px-2 text-white">{{$mission->description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <!-- Mission & Vision End -->
+
+    <!-- Concern Start -->
     <div class="container-fluid project py-5 mb-5">
         <div class="container">
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
-                <h5 class="text-primary">Our Project</h5>
-                <h1>Our Recently Completed Projects</h1>
+                <h2 class="text-dark">Our Concern</h2>
             </div>
             <div class="row g-5">
+                @foreach($concerns as $concern)
                 <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
                     <div class="project-item">
                         <div class="project-img">
-                            <img src="{{asset('/')}}website/img/project-1.jpg" class="img-fluid w-100 rounded" alt="">
+                            <img src="{{asset($concern->banner)}}" class="img-fluid w-100 rounded" alt="">
                             <div class="project-content">
-                                <a href="#" class="text-center">
-                                    <h4 class="text-secondary">Web design</h4>
-                                    <p class="m-0 text-white">Web Analysis</p>
+                                <a href="{{$concern->url}}" target="_blank" class="text-center">
+                                    <h4 class="text-white">{{$concern->name}}</h4>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".5s">
-                    <div class="project-item">
-                        <div class="project-img">
-                            <img src="{{asset('/')}}website/img/project-2.jpg" class="img-fluid w-100 rounded" alt="">
-                            <div class="project-content">
-                                <a href="#" class="text-center">
-                                    <h4 class="text-secondary">Cyber Security</h4>
-                                    <p class="m-0 text-white">Cyber Security Core</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".7s">
-                    <div class="project-item">
-                        <div class="project-img">
-                            <img src="{{asset('/')}}website/img/project-3.jpg" class="img-fluid w-100 rounded" alt="">
-                            <div class="project-content">
-                                <a href="#" class="text-center">
-                                    <h4 class="text-secondary">Mobile Info</h4>
-                                    <p class="m-0 text-white">Upcomming Phone</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
-                    <div class="project-item">
-                        <div class="project-img">
-                            <img src="{{asset('/')}}website/img/project-4.jpg" class="img-fluid w-100 rounded" alt="">
-                            <div class="project-content">
-                                <a href="#" class="text-center">
-                                    <h4 class="text-secondary">Web Development</h4>
-                                    <p class="m-0 text-white">Web Analysis</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".5s">
-                    <div class="project-item">
-                        <div class="project-img">
-                            <img src="{{asset('/')}}website/img/project-5.jpg" class="img-fluid w-100 rounded" alt="">
-                            <div class="project-content">
-                                <a href="#" class="text-center">
-                                    <h4 class="text-secondary">Digital Marketing</h4>
-                                    <p class="m-0 text-white">Marketing Analysis</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".7s">
-                    <div class="project-item">
-                        <div class="project-img">
-                            <img src="{{asset('/')}}website/img/project-6.jpg" class="img-fluid w-100 rounded" alt="">
-                            <div class="project-content">
-                                <a href="#" class="text-center">
-                                    <h4 class="text-secondary">keyword Research</h4>
-                                    <p class="m-0 text-white">keyword Analysis</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
-    <!-- Project End -->
-
-    <!-- Blog Start -->
-    <div class="container-fluid blog py-5 mb-5">
+    <!-- Concern End -->
+    <!-- Products Start -->
+    <div class="container-fluid py-5 mb-5 team" style="background-color: {{$cms->home_section_bg_color}}">
         <div class="container">
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
-                <h5 class="text-primary">Our Blog</h5>
-                <h1>Latest Blog & News</h1>
-            </div>
-            <div class="row g-5 justify-content-center">
-                <div class="col-lg-6 col-xl-4 wow fadeIn" data-wow-delay=".3s">
-                    <div class="blog-item position-relative bg-light rounded">
-                        <img src="{{asset('/')}}website/img/blog-1.jpg" class="img-fluid w-100 rounded-top" alt="">
-                        <span class="position-absolute px-4 py-3 bg-primary text-white rounded" style="top: -28px; right: 20px;">Web Design</span>
-                        <div class="blog-btn d-flex justify-content-between position-relative px-3" style="margin-top: -75px;">
-                            <div class="blog-icon btn btn-secondary px-3 rounded-pill my-auto">
-                                <a href="#" class="btn text-white">Read More</a>
-                            </div>
-                            <div class="blog-btn-icon btn btn-secondary px-4 py-3 rounded-pill ">
-                                <div class="blog-icon-1">
-                                    <p class="text-white px-2">Share<i class="fa fa-arrow-right ms-3"></i></p>
-                                </div>
-                                <div class="blog-icon-2">
-                                    <a href="#" class="btn me-1"><i class="fab fa-facebook-f text-white"></i></a>
-                                    <a href="#" class="btn me-1"><i class="fab fa-twitter text-white"></i></a>
-                                    <a href="#" class="btn me-1"><i class="fab fa-instagram text-white"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog-content text-center position-relative px-3" style="margin-top: -25px;">
-                            <img src="{{asset('/')}}website/img/admin.jpg" class="img-fluid rounded-circle border border-4 border-white mb-3" alt="">
-                            <h5 class="">By Daniel Martin</h5>
-                            <span class="text-secondary">24 March 2023</span>
-                            <p class="py-2">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Aliquam dolor eget urna ultricies tincidunt libero sit amet</p>
-                        </div>
-                        <div class="blog-coment d-flex justify-content-between px-4 py-2 border bg-primary rounded-bottom">
-                            <a href="#" class="text-white"><small><i class="fas fa-share me-2 text-secondary"></i>5324 Share</small></a>
-                            <a href="#" class="text-white"><small><i class="fa fa-comments me-2 text-secondary"></i>5 Comments</small></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-4 wow fadeIn" data-wow-delay=".5s">
-                    <div class="blog-item position-relative bg-light rounded">
-                        <img src="{{asset('/')}}website/img/blog-2.jpg" class="img-fluid w-100 rounded-top" alt="">
-                        <span class="position-absolute px-4 py-3 bg-primary text-white rounded" style="top: -28px; right: 20px;">Development</span>
-                        <div class="blog-btn d-flex justify-content-between position-relative px-3" style="margin-top: -75px;">
-                            <div class="blog-icon btn btn-secondary px-3 rounded-pill my-auto">
-                                <a href="#" class="btn text-white ">Read More</a>
-                            </div>
-                            <div class="blog-btn-icon btn btn-secondary px-4 py-3 rounded-pill ">
-                                <div class="blog-icon-1">
-                                    <p class="text-white px-2">Share<i class="fa fa-arrow-right ms-3"></i></p>
-                                </div>
-                                <div class="blog-icon-2">
-                                    <a href="#" class="btn me-1"><i class="fab fa-facebook-f text-white"></i></a>
-                                    <a href="#" class="btn me-1"><i class="fab fa-twitter text-white"></i></a>
-                                    <a href="#" class="btn me-1"><i class="fab fa-instagram text-white"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog-content text-center position-relative px-3" style="margin-top: -25px;">
-                            <img src="{{asset('/')}}website/img/admin.jpg" class="img-fluid rounded-circle border border-4 border-white mb-3" alt="">
-                            <h5 class="">By Daniel Martin</h5>
-                            <span class="text-secondary">23 April 2023</span>
-                            <p class="py-2">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Aliquam dolor eget urna ultricies tincidunt libero sit amet</p>
-                        </div>
-                        <div class="blog-coment d-flex justify-content-between px-4 py-2 border bg-primary rounded-bottom">
-                            <a href="#" class="text-white"><small><i class="fas fa-share me-2 text-secondary"></i>5324 Share</small></a>
-                            <a href="#" class="text-white"><small><i class="fa fa-comments me-2 text-secondary"></i>5 Comments</small></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-4 wow fadeIn" data-wow-delay=".7s">
-                    <div class="blog-item position-relative bg-light rounded">
-                        <img src="{{asset('/')}}website/img/blog-3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                        <span class="position-absolute px-4 py-3 bg-primary text-white rounded" style="top: -28px; right: 20px;">Mobile App</span>
-                        <div class="blog-btn d-flex justify-content-between position-relative px-3" style="margin-top: -75px;">
-                            <div class="blog-icon btn btn-secondary px-3 rounded-pill my-auto">
-                                <a href="#" class="btn text-white ">Read More</a>
-                            </div>
-                            <div class="blog-btn-icon btn btn-secondary px-4 py-3 rounded-pill ">
-                                <div class="blog-icon-1">
-                                    <p class="text-white px-2">Share<i class="fa fa-arrow-right ms-3"></i></p>
-                                </div>
-                                <div class="blog-icon-2">
-                                    <a href="#" class="btn me-1"><i class="fab fa-facebook-f text-white"></i></a>
-                                    <a href="#" class="btn me-1"><i class="fab fa-twitter text-white"></i></a>
-                                    <a href="#" class="btn me-1"><i class="fab fa-instagram text-white"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog-content text-center position-relative px-3" style="margin-top: -25px;">
-                            <img src="{{asset('/')}}website/img/admin.jpg" class="img-fluid rounded-circle border border-4 border-white mb-3" alt="">
-                            <h5 class="">By Daniel Martin</h5>
-                            <span class="text-secondary">30 jan 2023</span>
-                            <p class="py-2">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Aliquam dolor eget urna ultricies tincidunt libero sit amet</p>
-                        </div>
-                        <div class="blog-coments d-flex justify-content-between px-4 py-2 border bg-primary rounded-bottom">
-                            <a href="#" class="text-white"><small><i class="fas fa-share me-2 text-secondary"></i>5324 Share</small></a>
-                            <a href="#" class="text-white"><small><i class="fa fa-comments me-2 text-secondary"></i>5 Comments</small></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Blog End -->
-
-    <!-- Team Start -->
-    <div class="container-fluid py-5 mb-5 team">
-        <div class="container">
-            <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
-                <h5 class="text-primary">Our Team</h5>
-                <h1>Meet our expert Team</h1>
+                <h2 class="text-dark">Products</h2>
             </div>
             <div class="owl-carousel team-carousel wow fadeIn" data-wow-delay=".5s">
+                @foreach($products as $product)
                 <div class="rounded team-item">
                     <div class="team-content">
                         <div class="team-img-icon">
-                            <div class="team-img rounded-circle">
-                                <img src="{{asset('/')}}website/img/team-1.jpg" class="img-fluid w-100 rounded-circle" alt="">
+                            <div class="team-img">
+                                <a href="{{$product->url}}">
+                                    <img src="{{asset($product->banner)}}" class="img-fluid w-100" alt="">
+                                </a>
                             </div>
                             <div class="team-name text-center py-3">
-                                <h4 class="">Full Name</h4>
-                                <p class="m-0">Designation</p>
-                            </div>
-                            <div class="team-icon d-flex justify-content-center pb-4">
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <h6 class="">{{$product->name}}</h6>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="rounded team-item">
-                    <div class="team-content">
-                        <div class="team-img-icon">
-                            <div class="team-img rounded-circle">
-                                <img src="{{asset('/')}}website/img/team-2.jpg" class="img-fluid w-100 rounded-circle" alt="">
-                            </div>
-                            <div class="team-name text-center py-3">
-                                <h4 class="">Full Name</h4>
-                                <p class="m-0">Designation</p>
-                            </div>
-                            <div class="team-icon d-flex justify-content-center pb-4">
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rounded team-item">
-                    <div class="team-content">
-                        <div class="team-img-icon">
-                            <div class="team-img rounded-circle">
-                                <img src="{{asset('/')}}website/img/team-3.jpg" class="img-fluid w-100 rounded-circle" alt="">
-                            </div>
-                            <div class="team-name text-center py-3">
-                                <h4 class="">Full Name</h4>
-                                <p class="m-0">Designation</p>
-                            </div>
-                            <div class="team-icon d-flex justify-content-center pb-4">
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rounded team-item">
-                    <div class="team-content">
-                        <div class="team-img-icon">
-                            <div class="team-img rounded-circle">
-                                <img src="{{asset('/')}}website/img/team-4.jpg" class="img-fluid w-100 rounded-circle" alt="">
-                            </div>
-                            <div class="team-name text-center py-3">
-                                <h4 class="">Full Name</h4>
-                                <p class="m-0">Designation</p>
-                            </div>
-                            <div class="team-icon d-flex justify-content-center pb-4">
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square btn-secondary text-white rounded-circle m-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
-    <!-- Team End -->
-
-    <!-- Testimonial Start -->
-    <div class="container-fluid testimonial py-5 mb-5">
+    <!-- Products End -->
+    <!-- Available On Start -->
+    <div class="container-fluid project py-5 mb-5">
         <div class="container">
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
-                <h5 class="text-primary">Our Testimonial</h5>
-                <h1>Our Client Saying!</h1>
+                <h2 class="text-dark">Available On</h2>
             </div>
-            <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay=".5s">
-                <div class="testimonial-item border p-4">
-                    <div class="d-flex align-items-center">
-                        <div class="">
-                            <img src="{{asset('/')}}website/img/testimonial-1.jpg" alt="">
-                        </div>
-                        <div class="ms-4">
-                            <h4 class="text-secondary">Client Name</h4>
-                            <p class="m-0 pb-3">Profession</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
+            <div class="row g-5">
+                @foreach($shops as $shop)
+                    <div class="col-md-4 col-6 col-lg-2 wow fadeIn" data-wow-delay=".3s">
+                        <div class="project-item">
+                            <div class="project-img">
+                                <a href="{{$shop->url}}" target="_blank" class="text-center">
+                                <img src="{{asset($shop->banner)}}" class="img-fluid w-100 rounded" alt="">
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="border-top mt-4 pt-3">
-                        <p class="mb-0">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum aliquam dolor eget urna. Nam volutpat libero sit amet leo cursus, ac viverra eros morbi quis quam mi.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item border p-4">
-                    <div class=" d-flex align-items-center">
-                        <div class="">
-                            <img src="{{asset('/')}}website/img/testimonial-2.jpg" alt="">
-                        </div>
-                        <div class="ms-4">
-                            <h4 class="text-secondary">Client Name</h4>
-                            <p class="m-0 pb-3">Profession</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="border-top mt-4 pt-3">
-                        <p class="mb-0">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum aliquam dolor eget urna. Nam volutpat libero sit amet leo cursus, ac viverra eros morbi quis quam mi.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item border p-4">
-                    <div class=" d-flex align-items-center">
-                        <div class="">
-                            <img src="{{asset('/')}}website/img/testimonial-3.jpg" alt="">
-                        </div>
-                        <div class="ms-4">
-                            <h4 class="text-secondary">Client Name</h4>
-                            <p class="m-0 pb-3">Profession</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="border-top mt-4 pt-3">
-                        <p class="mb-0">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum aliquam dolor eget urna. Nam volutpat libero sit amet leo cursus, ac viverra eros morbi quis quam mi.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item border p-4">
-                    <div class=" d-flex align-items-center">
-                        <div class="">
-                            <img src="{{asset('/')}}website/{{asset('/')}}website/img/testimonial-4.jpg" alt="">
-                        </div>
-                        <div class="ms-4">
-                            <h4 class="text-secondary">Client Name</h4>
-                            <p class="m-0 pb-3">Profession</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                                <i class="fas fa-star me-1 text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="border-top mt-4 pt-3">
-                        <p class="mb-0">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum aliquam dolor eget urna. Nam volutpat libero sit amet leo cursus, ac viverra eros morbi quis quam mi.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+    <!-- Available On End -->
+    <!-- Article Start -->
+    <div class="container-fluid blog py-5 mb-5" style="background-color: {{$cms->home_section_bg_color}}">
+        <div class="container">
+            <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
+                <h2 class="text-dark">Articles</h2>
+            </div>
+            <div class="row g-5 justify-content-center">
+                @foreach($articles as $article)
+                <div class="col-lg-6 col-xl-4 wow fadeIn" data-wow-delay=".3s">
+                    <div class="blog-item position-relative bg-light rounded">
+                        <a href="{{$article->url == '' ? route('website.article.details',$article->slug) : $article->url}}" target="{{$article->url == '' ? "" : '_blank'}}">
+                            <img src="{{asset($article->thumbnail)}}" class="img-fluid w-100 rounded-top" alt="">
+                            <div class="blog-content text-center position-relative px-3 pt-5" style="margin-top: -25px;">
+                                <span class="text-dark">{{\Carbon\Carbon::parse($article->created_at)->format('d M, Y')}}</span>
+                                <h5 class="py-2">{{$article->title}}</h5>
+                            </div>
+                        </a>
 
-
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="text-center my-2">
+                <a href="{{route('website.articles')}}" class="btn btn-dark">More Articles</a>
+            </div>
+        </div>
+    </div>
+    <!-- Article End -->
     <!-- Contact Start -->
-    <div class="container-fluid py-5 mb-5">
+    <div class="container-fluid position-relative py-5 mb-5">
         <div class="container">
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
-                <h5 class="text-primary">Get In Touch</h5>
                 <h1 class="mb-3">Contact for any query</h1>
-                <p class="mb-2">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
             </div>
-            <div class="contact-detail position-relative p-5">
-                <div class="row g-5 mb-5 justify-content-center">
-                    <div class="col-xl-4 col-lg-6 wow fadeIn" data-wow-delay=".3s">
-                        <div class="d-flex bg-light p-3 rounded">
-                            <div class="flex-shrink-0 btn-square bg-secondary rounded-circle" style="width: 64px; height: 64px;">
-                                <i class="fas fa-map-marker-alt text-white"></i>
+            <div class="row g-5">
+                    <div class="col-lg-5 wow fadeIn" data-wow-delay=".3s">
+                        <div class="row g-5 mb-5 justify-content-center">
+                            <div class="col-xl-12 col-lg-12 wow fadeIn" data-wow-delay=".3s">
+                                <div class="d-flex bg-light p-3 rounded">
+                                    <div class="flex-shrink-0 btn-square bg-dark rounded-circle" style="width: 64px; height: 64px;">
+                                        <i class="fas fa-map-marker-alt text-white"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h4 class="text-dark">Address</h4>
+                                        <p class="text-dark"><small class="fw-bold">{{$company->address}}</small></p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ms-3">
-                                <h4 class="text-primary">Address</h4>
-                                <a href="https://goo.gl/maps/Zd4BCynmTb98ivUJ6" target="_blank" class="h5">23 rank Str, NY</a>
+                            <div class="col-xl-12 col-lg-12 wow fadeIn" data-wow-delay=".5s">
+                                <div class="d-flex bg-light p-3 rounded">
+                                    <div class="flex-shrink-0 btn-square bg-dark rounded-circle" style="width: 64px; height: 64px;">
+                                        <i class="fa fa-phone text-white"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h4 class="text-dark">Call Us</h4>
+                                        <p class="text-dark"><small class="fw-bold">{{$company->hotLine}}</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 wow fadeIn" data-wow-delay=".7s">
+                                <div class="d-flex bg-light p-3 rounded">
+                                    <div class="flex-shrink-0 btn-square bg-dark rounded-circle" style="width: 64px; height: 64px;">
+                                        <i class="fa fa-envelope text-white"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h4 class="text-dark">Email Us</h4>
+                                        <a class="h5" href="mailto:info@example.com" target="_blank">{{$company->email}}</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-6 wow fadeIn" data-wow-delay=".5s">
-                        <div class="d-flex bg-light p-3 rounded">
-                            <div class="flex-shrink-0 btn-square bg-secondary rounded-circle" style="width: 64px; height: 64px;">
-                                <i class="fa fa-phone text-white"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h4 class="text-primary">Call Us</h4>
-                                <a class="h5" href="tel:+0123456789" target="_blank">+012 3456 7890</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 wow fadeIn" data-wow-delay=".7s">
-                        <div class="d-flex bg-light p-3 rounded">
-                            <div class="flex-shrink-0 btn-square bg-secondary rounded-circle" style="width: 64px; height: 64px;">
-                                <i class="fa fa-envelope text-white"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h4 class="text-primary">Email Us</h4>
-                                <a class="h5" href="mailto:info@example.com" target="_blank">info@example.com</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-5">
                     <div class="col-lg-6 wow fadeIn" data-wow-delay=".3s">
-                        <div class="p-5 h-100 rounded contact-map">
-                            <iframe class="rounded w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3025.4710403339755!2d-73.82241512404069!3d40.685622471397615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c26749046ee14f%3A0xea672968476d962c!2s123rd%20St%2C%20Queens%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1686493221834!5m2!1sen!2sbd" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay=".5s">
-                        <div class="p-5 rounded contact-form">
-                            <div class="mb-4">
-                                <input type="text" class="form-control border-0 py-3" placeholder="Your Name">
+                        <form action="{{route('contact.submit')}}" method="post">
+                            @csrf
+                            <div class="p-5 rounded"  style="background-color: {{$cms->contact_form_color}}">
+                                <div class="mb-4">
+                                    <input type="text" name="name" required class="form-control border-0 py-3" placeholder="Name *">
+                                </div>
+                                <div class="mb-4">
+                                    <input type="text" name="email" required class="form-control border-0 py-3" placeholder="Email *">
+                                </div>
+                                <div class="mb-4">
+                                    <input type="text" name="phone" required class="form-control border-0 py-3" placeholder="Phone *">
+                                </div>
+                                <div class="mb-4">
+                                    <input type="text" name="subject" required class="form-control border-0 py-3" placeholder="Subject *">
+                                </div>
+                                <div class="mb-4">
+                                    <textarea name="message" required class="w-100 form-control border-0 py-3" rows="6" cols="10" placeholder="Message *"></textarea>
+                                </div>
+                                <div class="text-start">
+                                    <button class="btn bg-dark text-white py-3 px-5" type="submit">Send Message</button>
+                                </div>
                             </div>
-                            <div class="mb-4">
-                                <input type="email" class="form-control border-0 py-3" placeholder="Your Email">
-                            </div>
-                            <div class="mb-4">
-                                <input type="text" class="form-control border-0 py-3" placeholder="Project">
-                            </div>
-                            <div class="mb-4">
-                                <textarea class="w-100 form-control border-0 py-3" rows="6" cols="10" placeholder="Message"></textarea>
-                            </div>
-                            <div class="text-start">
-                                <button class="btn bg-primary text-white py-3 px-5" type="button">Send Message</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
     <!-- Contact End -->
-
 @endsection

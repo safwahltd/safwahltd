@@ -75,7 +75,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mb-4">
-                                                                    <label for="bannerEdit" class="col-md-3 form-label">banner</label>
+                                                                    <label for="bannerEdit" class="col-md-3 form-label">banner <small class="text-danger"> (2560 x 2560)</small></label>
                                                                     <div class="col-md-9">
                                                                         <input class="form-control" value="" id="bannerEdit" name="banner" type="file">
                                                                         <img src="{{asset($product->banner)}}" class="img-fluid img-responsive my-2" width="100" height="100" alt="">
@@ -101,7 +101,7 @@
                                                                 <div class="row mb-4">
                                                                     <label for="urlShow" class="col-md-3 form-label">Url</label>
                                                                     <div class="col-md-9">
-                                                                        <input class="form-control bg-transparent" required value="{{ $product->url }}" id="urlShow" name="url" placeholder="Enter Url" type="url">
+                                                                        <input class="form-control bg-transparent" value="{{ $product->url }}" id="urlShow" name="url" placeholder="Enter Url" type="url">
                                                                         <span class="text-danger">{{$errors->has('url') ? $errors->first('url'):''}}</span>
                                                                     </div>
                                                                 </div>
@@ -174,7 +174,7 @@
                                                         </div>
                                                         <div class="row justify-content-center mb-4">
                                                             <div class="col-md-6 text-center border">
-                                                                <label for="" class="form-label">Banner</label>
+                                                                <label for="" class="form-label">Banner <small class="text-danger"> (2560 x 2560)</small></label>
                                                                 <img src="{{asset($product->banner)}}" class="img-fluid img-responsive my-2" width="500" alt="">
                                                             </div>
                                                             <div class="col-md-6 text-center border">
@@ -225,7 +225,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <label for="bannerAdd" class="col-md-3 form-label">Banner</label>
+                                    <label for="bannerAdd" class="col-md-3 form-label">Banner <small class="text-danger"> (2560 x 2560)</small></label>
                                     <div class="col-md-9">
                                         <input class="form-control" value="{{old('banner')}}" id="bannerAdd" name="banner" type="file">
                                         <span class="text-danger">{{$errors->has('banner') ? $errors->first('banner'):''}}</span>

@@ -65,7 +65,7 @@
                                     <div class="input-group mb-3">
                                         <span class="input-group-text text-white  col-4 bg-dark-gradient" id="favicon">Favicon</span>
                                         <input type="file" name="favicon" class="form-control col-5 image-input" value="" id="favicon" placeholder="favicon" aria-label="favicon" aria-describedby="basic-addon1">
-                                        <img class="img-fluid img-responsive my-2" id="imagePreview-favicon" src="{{asset($companySetting->favicon)}}" alt="Your Image" style="width: 100px; height: auto;" />
+                                        <img class="img-fluid img-responsive my-2 mx-2" id="imagePreview-favicon" src="{{asset($companySetting->favicon)}}" alt="Your Image" style="width: 70px; height: auto;" />
                                     </div>
                                 </div>
                             </div>

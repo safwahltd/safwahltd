@@ -26,7 +26,12 @@ class ArticleController extends Controller
         try{
             $validate = Validator::make($request->all(),[
                 'title' => 'required|string|max:255',
-                'slug' => ['required', 'string', 'max:255']
+                'slug' => ['required', 'string', 'max:255'],
+                "thumbnail"         => [
+                    'image',
+                    'mimes:jpg,png,jpeg,gif,svg,webp',
+                    'dimensions:min_width=550,min_height=350,max_width=550,max_height=350'
+                ],
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());
@@ -92,7 +97,12 @@ class ArticleController extends Controller
                     'string',
                     'max:255',
                     Rule::unique('articles')->ignore($article->id)
-                ]
+                ],
+                "thumbnail"         => [
+                    'image',
+                    'mimes:jpg,png,jpeg,gif,svg,webp',
+                    'dimensions:min_width=550,min_height=350,max_width=550,max_height=350'
+                ],
             ]);
             if($validate->fails()){
                 toastr()->error($validate->messages());

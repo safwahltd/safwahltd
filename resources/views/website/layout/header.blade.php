@@ -1,47 +1,27 @@
-<div class="container-fluid bg-primary">
+<div class="container-fluid" style="background-color: {{$cms->header_bg_color}}">
     <div class="container">
         <nav class="navbar navbar-dark navbar-expand-lg py-0">
-            <a href="index.html" class="navbar-brand">
-                <h1 class="text-white fw-bold d-block">High<span class="text-secondary">Tech</span> </h1>
+            <a href="{{route('website.index')}}" class="navbar-brand">
+                @if($cms->company_logo_header == 1)
+                    <h3 class="text-white fw-bold d-block"><span class="text-dark"><img src="{{asset($company->logo)}}" style="width: 200px;" alt=""></span> </h3>
+                @else
+                    <h3 class="text-white fw-bold d-block"><span class="text-dark">{{$company->company_name}}</span> </h3>
+                @endif
             </a>
-            <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
+            <button type="button" class="navbar-toggler me-0 border-dark" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon text-dark"></span>
             </button>
             <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
                 <div class="navbar-nav ms-auto mx-xl-auto p-0">
-                    <a href="index.html" class="nav-item nav-link active text-secondary">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Services</a>
-                    <a href="project.html" class="nav-item nav-link">Projects</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu rounded">
-                            <a href="blog.html" class="dropdown-item">Our Blog</a>
-                            <a href="team.html" class="dropdown-item">Our Team</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="404.html" class="dropdown-item">404 Page</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="{{route('website.index')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.index' ? 'background-color: #a89a9a':''}}">HOME</a>
+                    <a href="{{route('website.index')}}#about_us" class="nav-item nav-link text-dark">ABOUT US</a>
+                    <a href="{{route('website.articles')}}" class="nav-item active nav-link" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.articles' ? 'background-color: #a89a9a':''}}">ARTICLES</a>
+                    <a href="{{route('bulk.order')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='bulk.order' ? 'background-color: #a89a9a':''}}">BULK ORDER</a>
+                    <a href="{{route('become.wholesaler')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='become.wholesaler' ? 'background-color: #a89a9a':''}}">BECOME WHOLESALER</a>
+                    <a href="{{route('website.contact')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.contact' ? 'background-color: #a89a9a':''}}">CONTACT</a>
                 </div>
             </div>
-            <div class="d-none d-xl-flex flex-shirink-0">
-                <div id="phone-tada" class="d-flex align-items-center justify-content-center me-4">
-                    <a href="#" class="position-relative animated tada infinite">
-                        <i class="fa fa-phone-alt text-white fa-2x"></i>
-                        <div class="position-absolute" style="top: -7px; left: 20px;">
-                            <span><i class="fa fa-comment-dots text-secondary"></i></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="d-flex flex-column pe-4 border-end">
-                    <span class="text-white-50">Have any questions?</span>
-                    <span class="text-secondary">Call: + 0123 456 7890</span>
-                </div>
-                <div class="d-flex align-items-center justify-content-center ms-4 ">
-                    <a href="#"><i class="bi bi-search text-white fa-2x"></i> </a>
-                </div>
-            </div>
+
         </nav>
     </div>
 </div>

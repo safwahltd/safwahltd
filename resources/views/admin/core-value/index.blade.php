@@ -42,7 +42,6 @@
 
                                     <td class="d-flex justify-content-center">
                                         <a href="#"  data-bs-toggle="modal" data-bs-target="#editCoreValue{{$key}}" class="btn btn-primary mx-2"><i class="fa fa-edit"></i></a>
-                                        <a href="#"  data-bs-toggle="modal" data-bs-target="#showCoreValue{{$key}}" class="btn btn-primary mx-2"><i class="fa fa-eye"></i></a>
                                         <form action="{{route('admin.core.value.destroy',$coreValue->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
@@ -75,7 +74,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-4">
-                                                                <label for="iconEdit" class="col-md-3 form-label">Icon</label>
+                                                                <label for="iconEdit" class="col-md-3 form-label">Image <small class="text-danger">(500 x 450)</small></label>
                                                                 <div class="col-md-9">
                                                                     <input class="form-control" value="" id="iconEdit" name="icon" type="file">
                                                                     <img src="{{asset($coreValue->icon)}}" class="img-fluid img-responsive my-2" width="100" height="100" alt="">
@@ -85,7 +84,7 @@
                                                             <div class="row mb-4">
                                                                 <label for="serialshow" class="col-md-3 form-label">Serial</label>
                                                                 <div class="col-md-9">
-                                                                    <input class="form-control bg-transparent" required value="{{ $coreValue->serial }}" id="serialshow" name="serial" placeholder="Enter Serial Number" type="number">
+                                                                    <input class="form-control bg-transparent" value="{{ $coreValue->serial }}" id="serialshow" name="serial" placeholder="Enter Serial Number" type="number">
                                                                     <span class="text-danger">{{$errors->has('serial') ? $errors->first('serial'):''}}</span>
                                                                 </div>
                                                             </div>
@@ -109,60 +108,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal fade" id="showCoreValue{{$key}}">
-                                    <div class="modal-dialog modal-dialog-centered task-view-modal" role="document">
-                                        <div class="modal-content modal-content-demo">
-                                            <div class="modal-header p-5">
-                                                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="card">
-                                                    <div class="card-header border-bottom justify-content-between">
-                                                        <h3 class="card-title"><i class="fa fa-credit-card-alt"></i> Show Core Values </h3>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="row mb-4">
-                                                                <label for="" class="col-md-3 form-label">Title</label>
-                                                                <div class="col-md-9">
-                                                                    <input class="form-control bg-transparent" readonly value="{{ $coreValue->title }}" id="" name="name" placeholder="Enter name" type="text">
-                                                                    <span class="text-danger">{{$errors->has('name') ? $errors->first('name'):''}}</span>
-                                                                </div>
-                                                            </div>
-                                                        <div class="row mb-4">
-                                                                <label for="" class="col-md-3 form-label">Icon</label>
-                                                                <div class="col-md-9">
-                                                                    <img src="{{asset($coreValue->icon)}}" class="img-fluid img-responsive my-2" width="150" height="150" alt="">
-                                                                    <span class="text-danger">{{$errors->has('logo') ? $errors->first('logo'):''}}</span>
-                                                                </div>
-                                                        </div>
-                                                        <div class="row mb-4">
-                                                                <label for="serialshow" class="col-md-3 form-label">Serial</label>
-                                                                <div class="col-md-9">
-                                                                    <input class="form-control  bg-transparent" readonly value="{{ $coreValue->serial }}" id="serialshow" name="serial" placeholder="Enter Serial Number" type="number">
-                                                                    <span class="text-danger">{{$errors->has('serial') ? $errors->first('serial'):''}}</span>
-                                                                </div>
-                                                            </div>
-                                                        <div class="row mb-4 d-flex form-group">
-                                                                <div class="col-md-3 form-label">
-                                                                    <label class="" for="status">Status</label>
-                                                                </div>
-                                                                <div class="col-md-9">
-                                                                    <select class="form-control select2 form-select" disabled readonly id="status" name="status" data-placeholder="Choose one">
-                                                                        <option class="form-control" label="Choose one" disabled selected></option>
-                                                                        <option {{ $coreValue->status == 1 ? 'selected':''  }}  value="1">Active</option>
-                                                                        <option {{ $coreValue->status == 0 ? 'selected':''  }}  value="0">Inactive</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             @endforeach
                             </tbody>
                         </table>
@@ -198,16 +143,16 @@
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <label for="iconAdd" class="col-md-3 form-label">Icon</label>
+                                    <label for="iconAdd" class="col-md-3 form-label">Image <small class="text-danger">(500 x 450)</small></label>
                                     <div class="col-md-9">
                                         <input class="form-control" value="{{old('icon')}}" id="iconAdd" name="icon" type="file">
                                         <span class="text-danger">{{$errors->has('icon') ? $errors->first('icon'):''}}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <label for="serialAdd" class="col-md-3 form-label">Serial <span class="text-danger">*</span></label>
+                                    <label for="serialAdd" class="col-md-3 form-label">Serial</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" required value="{{old('serial')}}" id="serialAdd" name="serial" placeholder="Enter Serial No" type="number">
+                                        <input class="form-control" value="{{old('serial')}}" id="serialAdd" name="serial" placeholder="Enter Serial No" type="number">
                                         <span class="text-danger">{{$errors->has('serial') ? $errors->first('serial'):''}}</span>
                                     </div>
                                 </div>
