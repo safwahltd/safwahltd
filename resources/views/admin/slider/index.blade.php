@@ -13,9 +13,11 @@
                     <div class="row">
                         <div class="card-header border-bottom justify-content-between">
                             <h3 class="card-title"> Slider</h3>
+                            @if(auth()->user()->hasPermission('admin slider store'))
                             <a class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#addSlider">
                                 ADD <i class="fa fa-plus"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -23,7 +25,6 @@
                     <div class="table-responsive export-table">
                         <table  class="table table-bordered text-center text-nowrap key-buttons border-bottom  w-100" id="file-datatable">
                             <thead>
-
                             <tr>
                                 <th class="border-bottom-0">SL No</th>
                                 <th class="border-bottom-0">Name</th>
@@ -31,7 +32,9 @@
                                 <th class="border-bottom-0">Icon</th>
                                 <th class="border-bottom-0">Serial</th>
                                 <th class="border-bottom-0">Status</th>
+                                @if(auth()->user()->hasPermission('admin slider update') || auth()->user()->hasPermission('admin slider destroy'))
                                 <th class="border-bottom-0">Action</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -40,19 +43,25 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $slider->title }}</td>
                                     <td>{{ $slider->slogan }}</td>
-                                    <td><img src="{{ asset($slider->banner) }}" class="img-responsive img-fluid" width="50" height="50" alt=""></td>
+                                    <td><img src="{{ asset($slider->banner) }}" class="img-responsive img-fluid" width="50" height="50" alt="{{ $slider->title }}"></td>
                                     <td class="col-2">
                                         <span class="p-1 {{$slider->status == 1 ? 'bg-success':'bg-danger'}}"> {{$slider->status == 1 ? 'Active':'Inactive'}}</span>
                                     </td>
                                     <td>{{ $slider->serial }}</td>
+                                    @if(auth()->user()->hasPermission('admin slider update') || auth()->user()->hasPermission('admin slider destroy'))
                                     <td class="d-flex">
+                                        @if(auth()->user()->hasPermission('admin slider update') || auth()->user()->hasPermission('admin slider destroy'))
                                         <a href=""  data-bs-toggle="modal" data-bs-target="#editSlider{{$key}}" class="btn btn-primary mx-2"><i class="fa fa-edit"></i></a>
+                                        @endif
+                                        @if(auth()->user()->hasPermission('admin slider update') || auth()->user()->hasPermission('admin slider destroy'))
                                         <form action="{{route('admin.slider.destroy',$slider->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('are you sure to delete ? ')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </form>
+                                        @endif
                                     </td>
+                                    @endif
                                 </tr>
                                 <div class="modal fade" id="editSlider{{$key}}">
                                     <div class="modal-dialog modal-dialog-centered task-view-modal" role="document">
@@ -96,7 +105,7 @@
                                                                     <span class="input-group-text text-white col-4 bg-dark-gradient" id="bannerEdit">Banner  <small class="text-danger ms-2"> (1920 x 1080)</small></span>
                                                                     <input type="file" name="banner" class="form-control col-5 image-input" value="" id="b{{$key}}" placeholder="banner" aria-label="banner" aria-describedby="basic-addon1">
                                                                     <img class="img-fluid img-responsive mx-1" id="imagePreview-b{{$key}}" src="{{asset($slider->banner)}}"
-                                                                         alt="Your Image" style="width: 200px; height: auto;" />
+                                                                         alt="{{ $slider->title }}" style="width: 200px; height: auto;" />
                                                                 </div>
                                                             </div>
                                                             <div class="row input-group mb-4">

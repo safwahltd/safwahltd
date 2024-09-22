@@ -13,9 +13,11 @@
                     <div class="row">
                         <div class="card-header border-bottom justify-content-between">
                             <h3 class="card-title"> Mission & Vision</h3>
+                            @if(auth()->user()->hasPermission('admin mission store'))
                             <a class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#addmission">
                                 ADD <i class="fa fa-plus"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -29,7 +31,9 @@
                                 <th class="border-bottom-0">Image</th>
                                 <th class="border-bottom-0">Serial</th>
                                 <th class="border-bottom-0">Status</th>
+                                @if(auth()->user()->hasPermission('admin mission update') || auth()->user()->hasPermission('admin mission destroy'))
                                 <th class="border-bottom-0">Action</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -38,18 +42,24 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $mission->title }}</td>
                                     <td><img src="{{asset($mission->image)}}" width="70" alt=""></td>
+                                    <td>{{ $mission->serial }}</td>
                                     <td class="col-2">
                                         <span class="p-1 {{$mission->status == 1 ? 'bg-success':'bg-danger'}}"> {{$mission->status == 1 ? 'Active':'Inactive'}}</span>
                                     </td>
-                                    <td>{{ $mission->serial }}</td>
+                                    @if(auth()->user()->hasPermission('admin mission update') || auth()->user()->hasPermission('admin mission destroy'))
                                     <td class="d-flex">
+                                        @if(auth()->user()->hasPermission('admin mission update'))
                                         <a href=""  data-bs-toggle="modal" data-bs-target="#editmission{{$key}}" class="btn btn-primary mx-2"><i class="fa fa-edit"></i></a>
+                                        @endif
+                                        @if(auth()->user()->hasPermission('admin mission destroy'))
                                         <form action="{{route('admin.mission.destroy',$mission->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('are you sure to delete ? ')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </form>
+                                        @endif
                                     </td>
+                                    @endif
                                 </tr>
                                 <div class="modal fade" id="editmission{{$key}}">
                                     <div class="modal-dialog modal-dialog-centered task-view-modal" role="document">

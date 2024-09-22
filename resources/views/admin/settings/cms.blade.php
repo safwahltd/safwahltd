@@ -156,7 +156,9 @@
                     </div>
                 </div>
             </div>
+            @if(auth()->user()->hasPermission('admin cms update'))
             <button class="btn btn-primary" type="submit">update</button>
+            @endif
         </form>
 
     </div>

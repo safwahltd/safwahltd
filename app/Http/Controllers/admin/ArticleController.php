@@ -21,6 +21,9 @@ class ArticleController extends Controller
             return back();
         }
     }
+    public function create(){
+        return view('admin.article.add');
+    }
     public function store(Request $request){
         if(auth()->user()->hasPermission('admin article store')){
         try{
@@ -86,6 +89,10 @@ class ArticleController extends Controller
             return back();
         }
     }
+    public function edit($slug){
+        $article = Article::where('slug',$slug)->first();
+        return view('admin.article.edit',compact('article'));
+    }
     public function update(Request $request,$id){
         if(auth()->user()->hasPermission('admin article update')){
         try{
@@ -143,7 +150,7 @@ class ArticleController extends Controller
             $article->status = $request->status;
             $article->save();
             toastr()->success('Article Update Successfully.');
-            return back();
+            return redirect()->route('admin.article.index');
         }
         catch(Exception $e){
             toastr()->error($e->getMessage());

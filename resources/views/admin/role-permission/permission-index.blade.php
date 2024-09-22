@@ -5,12 +5,6 @@
         <div>
             <h1 class="page-title">Permission Module</h1>
         </div>
-        <div class="ms-auto pageheader-btn">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Permission</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Permission Module</li>
-            </ol>
-        </div>
     </div>
     <div class="row row-sm">
         <div class="col-lg-12">
@@ -19,44 +13,54 @@
                     <div class="row">
                         <div class="card-header border-bottom justify-content-between">
                             <h3 class="card-title">Permission Table</h3>
+                            @if(auth()->user()->hasPermission('admin permission store'))
                             <a class="btn btn-primary px-5"  data-bs-toggle="modal" data-bs-target="#addPermission"   href="#">
                                 ADD <i class="fa fa-plus"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive export-table">
-                        <table  class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+                        <table id="file-datatable" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
                             <thead>
 
                             <tr>
-                                <th class="border-bottom-0">Select</th>
+{{--                                <th class="border-bottom-0">Select</th>--}}
                                 <th class="border-bottom-0">SL No</th>
                                 <th class="border-bottom-0">Name</th>
                                 <th class="border-bottom-0">Status</th>
+                                @if(auth()->user()->hasPermission('admin permission update') || auth()->user()->hasPermission('admin permission destroy'))
                                 <th class="border-bottom-0">Action</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($permissions as $key => $permission)
                                 <tr>
-                                    <td class="justify-content-center">
+                                    {{--<td class="justify-content-center">
                                         <input class="form-check form-check-label" style="width: 70px" type="checkbox" name="check">
-                                    </td>
+                                    </td>--}}
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $permission->name }}</td>
                                     <td class="col-2">
                                         <span class="p-1 {{$permission->status == 1 ? 'bg-success':'bg-warning text-white'}}">{{$permission->status == 1 ? 'Active':'Inactive'}}</span>
                                     </td>
+                                    @if(auth()->user()->hasPermission('admin permission update') || auth()->user()->hasPermission('admin permission destroy'))
                                     <td class="d-flex">
+                                        @if(auth()->user()->hasPermission('admin permission update'))
                                         <a href="#" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#Editpermission{{$key}}" ><i class="fa fa-edit"></i></a>
+                                        @endif
+                                        @if(auth()->user()->hasPermission('admin permission destroy'))
                                         <form action="{{route('admin.permission.destroy',$permission->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('are you sure to delete ? ')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </form>
+                                        @endif
                                     </td>
+                                    @endif
                                 </tr>
                                 <div class="modal fade" id="Editpermission{{$key}}">
                                     <div class="modal-dialog modal-dialog-centered task-view-modal" role="document">
