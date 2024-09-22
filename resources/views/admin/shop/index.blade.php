@@ -8,15 +8,17 @@
                     <div class="row">
                         <div class="card-header border-bottom justify-content-between">
                             <h3 class="card-title">Shops</h3>
+                            @if(auth()->user()->hasPermission('admin shop store'))
                             <a class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#addshop" href="">
                                 ADD <i class="fa fa-plus"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive export-table">
-                        <table  class="table table-bordered text-center text-nowrap key-buttons border-bottom  w-100">
+                        <table id="file-datatable" class="table table-bordered text-center text-nowrap key-buttons border-bottom  w-100">
                             <thead>
                             <tr>
                                 <th class="border-bottom-0">SL No</th>
@@ -33,19 +35,23 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $shop->name }}</td>
-                                    <td><img src="{{ asset($shop->banner) }}" class="img-responsive img-fluid" width="50" height="50" alt=""></td>
+                                    <td><img src="{{ asset($shop->banner) }}" class="img-responsive img-fluid" width="50" height="50" alt="{{$shop->name}}"></td>
                                     <td>{{ $shop->serial }}</td>
                                     <td class="col-2">
                                         <span class="p-1 {{$shop->status == 1 ? 'bg-success':'bg-danger'}}">{{$shop->status == 1 ? 'Active':'Inactive'}}</span>
                                     </td>
                                     <td class="d-flex justify-content-center">
+                                        @if(auth()->user()->hasPermission('admin shop update'))
                                         <a href="#"  data-bs-toggle="modal" data-bs-target="#editshop{{$key}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                        @endif
                                         <a href="#"  data-bs-toggle="modal" data-bs-target="#showshop{{$key}}" class="btn btn-primary mx-2"><i class="fa fa-eye"></i></a>
+                                        @if(auth()->user()->hasPermission('admin shop destroy'))
                                         <form action="{{route('admin.shop.destroy',$shop->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('are you sure to delete ? ')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </form>
+                                        @endif
                                     </td>
                                 </tr>
                                 <div class="modal fade" id="editshop{{$key}}">
@@ -78,7 +84,7 @@
                                                                         <input class="form-control image-input" value="{{old('banner')}}" id="{{$key}}" name="banner"
                                                                                type="file">
                                                                         <img class="img-fluid img-responsive my-2" id="imagePreview-{{$key}}" src="{{asset($shop->banner)}}"
-                                                                             alt="Your Image" style="width: 150px; height: auto;" />
+                                                                             alt="{{$shop->name}}" style="width: 150px; height: auto;" />
                                                                         <span class="text-danger">{{$errors->has('banner') ? $errors->first('banner'):''}}</span>
                                                                     </div>
                                                                 </div>
@@ -140,7 +146,7 @@
                                                         <div class="row mb-4">
                                                                 <label for="" class="col-md-3 form-label">banner</label>
                                                                 <div class="col-md-9">
-                                                                    <img src="{{asset($shop->banner)}}" class="img-fluid img-responsive my-2" width="150" height="150" alt="">
+                                                                    <img src="{{asset($shop->banner)}}" class="img-fluid img-responsive my-2" width="150" height="150" alt="{{$shop->name}}">
                                                                     <span class="text-danger">{{$errors->has('logo') ? $errors->first('logo'):''}}</span>
                                                                 </div>
                                                             </div>

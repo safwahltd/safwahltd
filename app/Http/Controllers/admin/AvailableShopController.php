@@ -30,7 +30,7 @@ class AvailableShopController extends Controller
     public function store(Request $request){
 
         try{
-//                if(auth()->user()->hasPermission('admin shop store')){
+                if(auth()->user()->hasPermission('admin shop store')){
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
             ]);
@@ -68,11 +68,11 @@ class AvailableShopController extends Controller
             $shop->status = $request->status;
             $shop->save();
             return back();
-//            }
-//        else{
-//            toastr()->error('You Have No Permission.');
-//            return back();
-//        }
+            }
+        else{
+            toastr()->error('You Have No Permission.');
+            return back();
+        }
         }
         catch(Exception $e){
             toastr()->error($e->getMessage());
@@ -136,8 +136,8 @@ class AvailableShopController extends Controller
 
             try{
                 if(auth()->user()->hasPermission('admin shop destroy')){
-                $d = AvailableShop::find($id);
-                $d->delete();
+                $shop = AvailableShop::find($id);
+                $shop->delete();
                 toastr()->success('Delete Successfully.');
                 return back();
                 }

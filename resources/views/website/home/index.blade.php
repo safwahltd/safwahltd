@@ -7,20 +7,20 @@
         <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
             <ol class="carousel-indicators">
                 @foreach($sliders as $key => $slider)
-                <li data-bs-target="#carouselId" data-bs-slide-to="{{$key}}" class="{{$key == 0 ? 'active':''}}" aria-current="true" aria-label="First slide"></li>
+                <li data-bs-target="#carouselId" data-bs-slide-to="{{$key}}" class="bg-white {{$key == 0 ? 'active':''}}" aria-current="true" aria-label="First slide"></li>
                 @endforeach
             </ol>
             <div class="carousel-inner" role="listbox">
                 @foreach($sliders as $key => $slider)
                 <div class="carousel-item {{$key == 0 ? 'active':''}}">
-                    <img src="{{asset($slider->banner)}}" class="img-fluid" alt="First slide">
+                    <img src="{{asset($slider->banner)}}" class="img-fluid" alt="{{ $slider->title }}">
                     <div class="carousel-caption">
                         <div class="container carousel-content">
                             <h6 class="text-white h4 animated fadeInUp">{{ $slider->title }}</h6>
                             <h3 class="text-white display-3 mb-4 animated fadeInRight">{{$slider->slogan}}</h3>
                             <p class="mb-4 text-white fs-5 animated fadeInDown">{{$slider->description}}</p>
-                            <a href="{{$slider->url}}" class="mx-2"><button type="button" class="px-4 my-2 text-white py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn1 animated fadeInLeft">Read More</button></a>
-                            <a href="{{route('website.contact')}}" class="mx-2"><button type="button" class="px-4 py-sm-3 px-sm-5 btn btn-primary text-white rounded-pill carousel-content-btn2 animated fadeInRight">Contact Us</button></a>
+                            <a href="{{$slider->url}}" class="mx-2"><button type="button" style="border: 1px solid white" class="px-4 my-2 text-white py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn1 animated fadeInLeft">Read More</button></a>
+                            <a href="{{route('website.contact')}}" class="mx-2"><button type="button" style="border: 1px solid white" class="px-4 py-sm-3 px-sm-5 btn btn-primary text-white rounded-pill carousel-content-btn2 animated fadeInRight">Contact Us</button></a>
                         </div>
                     </div>
                 </div>
@@ -78,9 +78,9 @@
             <div class="row g-5">
                 <div class="col-lg-5 col-md-6 col-sm-12 wow fadeIn" data-wow-delay=".3s">
                     <div class="h-100 position-relative">
-                        <img src="{{asset($about->image_1)}}" class="img-fluid w-75 rounded" alt="" style="margin-bottom: 25%;">
+                        <img src="{{asset($about->image_1)}}" class="img-fluid w-75 rounded" alt="{{$about->title}}" style="margin-bottom: 25%;">
                         <div class="position-absolute w-75" style="top: 25%; left: 25%;">
-                            <img src="{{asset($about->image_2)}}" class="img-fluid w-100 rounded" alt="">
+                            <img src="{{asset($about->image_2)}}" class="img-fluid w-100 rounded" alt="{{$about->title}}">
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                     <div class="services-item">
                         <div class="text-center">
                             <div class="">
-                                <img class="mb-2" src="{{asset($coreValue->icon)}}" width="250"  alt="">
+                                <img class="mb-2" src="{{asset($coreValue->icon)}}" width="250"  alt="{{$coreValue->title}}">
                                 <h5 class="mb-3 p-2 text-dark">{{$coreValue->title}}</h5>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                         <div class="services-item bg-dark">
                             <div class="text-center">
                                 <div class="">
-                                    <img class="mb-2" src="{{asset($mission->image)}}" width="250"  alt="">
+                                    <img class="mb-2" src="{{asset($mission->image)}}" width="250"  alt="{{$mission->title}}">
                                     <h5 class="mb-3 px-2 text-white">{{$mission->title}}</h5>
                                     <p class="mb-3 px-2 text-white">{{$mission->description}}</p>
                                 </div>
@@ -156,7 +156,7 @@
                 <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
                     <div class="project-item">
                         <div class="project-img">
-                            <img src="{{asset($concern->banner)}}" class="img-fluid w-100 rounded" alt="">
+                            <img src="{{asset($concern->banner)}}" class="img-fluid w-100 rounded" alt="{{$concern->name}}">
                             <div class="project-content">
                                 <a href="{{$concern->url}}" target="_blank" class="text-center">
                                     <h4 class="text-white">{{$concern->name}}</h4>
@@ -183,7 +183,7 @@
                         <div class="team-img-icon">
                             <div class="team-img">
                                 <a href="{{$product->url}}">
-                                    <img src="{{asset($product->banner)}}" class="img-fluid w-100" alt="">
+                                    <img src="{{asset($product->banner)}}" class="img-fluid w-100" alt="{{$product->name}}">
                                 </a>
                             </div>
                             <div class="team-name text-center py-3">
@@ -209,7 +209,7 @@
                         <div class="project-item">
                             <div class="project-img">
                                 <a href="{{$shop->url}}" target="_blank" class="text-center">
-                                <img src="{{asset($shop->banner)}}" class="img-fluid w-100 rounded" alt="">
+                                <img src="{{asset($shop->banner)}}" class="img-fluid w-100 rounded" alt="{{$shop->name}}">
                                 </a>
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                 <div class="col-lg-6 col-xl-4 wow fadeIn" data-wow-delay=".3s">
                     <div class="blog-item position-relative bg-light rounded">
                         <a href="{{$article->url == '' ? route('website.article.details',$article->slug) : $article->url}}" target="{{$article->url == '' ? "" : '_blank'}}">
-                            <img src="{{asset($article->thumbnail)}}" class="img-fluid w-100 rounded-top" alt="">
+                            <img src="{{asset($article->thumbnail)}}" class="img-fluid w-100 rounded-top" alt="{{$article->title}}">
                             <div class="blog-content text-center position-relative px-3 pt-5" style="margin-top: -25px;">
                                 <span class="text-dark">{{\Carbon\Carbon::parse($article->created_at)->format('d M, Y')}}</span>
                                 <h5 class="py-2">{{$article->title}}</h5>

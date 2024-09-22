@@ -8,15 +8,17 @@
                     <div class="row">
                         <div class="card-header border-bottom justify-content-between">
                             <h3 class="card-title">Concern</h3>
+                            @if(auth()->user()->hasPermission('admin concern store'))
                             <a class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#addConcern" href="">
                                 ADD <i class="fa fa-plus"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive export-table">
-                        <table  class="table table-bordered text-center text-nowrap key-buttons border-bottom  w-100">
+                        <table id="file-datatable" class="table table-bordered text-center text-nowrap key-buttons border-bottom  w-100">
                             <thead>
                             <tr>
                                 <th class="border-bottom-0">SL No</th>
@@ -39,13 +41,17 @@
                                         <span class="p-1 {{$concern->status == 1 ? 'bg-success':'bg-danger'}}">{{$concern->status == 1 ? 'Active':'Inactive'}}</span>
                                     </td>
                                     <td class="d-flex justify-content-center">
-                                        <a href="#"  data-bs-toggle="modal" data-bs-target="#editConcern{{$key}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                        @if(auth()->user()->hasPermission('admin concern update'))
+                                            <a href="#"  data-bs-toggle="modal" data-bs-target="#editConcern{{$key}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                        @endif
                                         <a href="#"  data-bs-toggle="modal" data-bs-target="#showConcern{{$key}}" class="btn btn-primary mx-2"><i class="fa fa-eye"></i></a>
-                                        <form action="{{route('admin.concern.destroy',$concern->id)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" onclick="return confirm('are you sure to delete ? ')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
-                                        </form>
+                                            @if(auth()->user()->hasPermission('admin concern destroy'))
+                                                <form action="{{route('admin.concern.destroy',$concern->id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" onclick="return confirm('are you sure to delete ? ')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                                                </form>
+                                            @endif
                                     </td>
                                 </tr>
                                 <div class="modal fade" id="editConcern{{$key}}">

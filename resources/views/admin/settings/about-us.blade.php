@@ -59,7 +59,9 @@
                                     </select>
                                 </div>
                             </div>
+                            @if(auth()->user()->hasPermission('admin about update'))
                             <button class="btn btn-primary float-end" type="submit">Submit</button>
+                            @endif
                         </form>
                     </div>
                 </div>

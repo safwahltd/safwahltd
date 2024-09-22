@@ -19,7 +19,7 @@ class WebsiteController extends Controller
         $coreValues = CoreValue::where('status',1)->orderBy('serial','asc')->get();
         $concerns = Concern::where('status',1)->orderBy('serial','asc')->get();
         $products = Product::where('status',1)->orderBy('serial','asc')->get();
-        $articles = Article::where('status',1)->orderBy('serial','asc')->get();
+        $articles = Article::where('status',1)->latest()->get()->take(3);
         $shops = AvailableShop::where('status',1)->orderBy('serial','asc')->get();
         $missions = MissionVision::where('status',1)->orderBy('serial','asc')->get();
         return view('website.home.index',compact('sliders','coreValues','concerns','products','articles','shops','missions'));
@@ -33,7 +33,8 @@ class WebsiteController extends Controller
     }
     public function articleDetails($slug){
         $article = Article::where('slug',$slug)->where('status',1)->first();
-        return view('website.article.article-details',compact('article'));
+        $articles = Article::whereNotIn('id',[$article->id])->get()->take(10);
+        return view('website.article.article-details',compact('article','articles'));
     }
     public function bulkOrder(){
         return view('website.bulk-order.index');

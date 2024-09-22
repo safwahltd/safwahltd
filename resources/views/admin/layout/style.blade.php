@@ -1,5 +1,5 @@
 <!-- FAVICON -->
-<link rel="shortcut icon" type="image/x-icon" href="{{--{{asset($websiteSetup->icon)}}--}}" />
+<link rel="shortcut icon" type="image/x-icon" href="{{asset($company->favicon)}}" />
 
 <!-- BOOTSTRAP CSS -->
 <link id="style" href="{{asset('/')}}admin/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />

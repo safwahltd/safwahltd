@@ -13,9 +13,11 @@
                     <div class="row">
                         <div class="card-header border-bottom justify-content-between">
                             <h3 class="card-title"> Social Link</h3>
+                            @if(auth()->user()->hasPermission('admin social link store'))
                             <a class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#addPaymentProcessor">
                                 ADD <i class="fa fa-plus"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -30,31 +32,35 @@
                                 <th class="border-bottom-0">Icon</th>
                                 <th class="border-bottom-0">Serial</th>
                                 <th class="border-bottom-0">Status</th>
+                                @if(auth()->user()->hasPermission('admin social link update') || auth()->user()->hasPermission('admin social link destroy'))
                                 <th class="border-bottom-0">Action</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
-                            @php
-                                $customerId = 0;
-                            @endphp
-
                             @foreach($socialLinks as $key => $socialLink)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $socialLink->name }}</td>
-                                    <td><img src="{{ asset($socialLink->icon) }}" class="img-responsive img-fluid" width="50" height="50" alt=""></td>
+                                    <td><img src="{{ asset($socialLink->icon) }}" class="img-responsive img-fluid" width="50" height="50" alt="{{ $socialLink->name }}"></td>
                                     <td class="col-2">
                                         <span class="p-1 {{$socialLink->status == 1 ? 'bg-success':'bg-danger'}}"> {{$socialLink->status == 1 ? 'Active':'Inactive'}}</span>
                                     </td>
                                     <td>{{ $socialLink->serial }}</td>
+                                    @if(auth()->user()->hasPermission('admin social link update') || auth()->user()->hasPermission('admin social link destroy'))
                                     <td class="d-flex">
+                                        @if(auth()->user()->hasPermission('admin social link update'))
                                         <a href=""  data-bs-toggle="modal" data-bs-target="#editPaymentProcessor{{$key}}" class="btn btn-primary mx-2"><i class="fa fa-edit"></i></a>
+                                        @endif
+                                        @if(auth()->user()->hasPermission('admin social link destroy'))
                                         <form action="{{route('admin.social.link.destroy',$socialLink->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('are you sure to delete ? ')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </form>
+                                        @endif
                                     </td>
+                                    @endif
                                 </tr>
                                 <div class="modal fade" id="editPaymentProcessor{{$key}}">
                                     <div class="modal-dialog modal-dialog-centered task-view-modal" role="document">
@@ -84,7 +90,7 @@
                                                                     <span class="input-group-text text-white col-4 bg-dark-gradient" id="iconAdd">Icon</span>
                                                                     <input type="file" name="icon" class="form-control col-5 image-input" value="" id="{{$key}}" placeholder="icon" aria-label="logo" aria-describedby="basic-addon1">
                                                                     <img class="img-fluid img-responsive mx-1" id="imagePreview-{{$key}}" src="{{asset($socialLink->icon)}}"
-                                                                         alt="Your Image" style="width: 200px; height: auto;" />
+                                                                         alt="{{ $socialLink->name }}" style="width: 200px; height: auto;" />
                                                                 </div>
                                                             </div>
                                                             <div class="row input-group mb-4">

@@ -8,7 +8,7 @@
                     <h3 class="text-white fw-bold d-block"><span class="text-dark">{{$company->company_name}}</span> </h3>
                 @endif
             </a>
-            <button type="button" class="navbar-toggler me-0 border-dark" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <button type="button" class="navbar-toggler bg-dark me-0 border-dark" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon text-dark"></span>
             </button>
             <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">

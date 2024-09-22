@@ -5,12 +5,6 @@
         <div>
             <h1 class="page-title">User Module</h1>
         </div>
-        <div class="ms-auto pageheader-btn">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0);">User</a></li>
-                <li class="breadcrumb-item active" aria-current="page">User Module</li>
-            </ol>
-        </div>
     </div>
     <div class="row row-sm">
         <div class="col-lg-12">
@@ -19,38 +13,40 @@
                     <div class="row">
                         <div class="card-header border-bottom justify-content-between">
                             <h3 class="card-title">User Table</h3>
+                            @if(auth()->user()->hasPermission('admin user store'))
                             <a class="btn btn-primary px-5"  data-bs-toggle="modal" data-bs-target="#addUser"   href="#">
                                 ADD <i class="fa fa-plus"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive export-table">
-                        <table  class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+                        <table id="file-datatable" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
                             <thead>
 
                             <tr>
-                                <th class="border-bottom-0">Select</th>
+{{--                                <th class="border-bottom-0">Select</th>--}}
                                 <th class="border-bottom-0">SL No</th>
                                 <th class="border-bottom-0">Name</th>
                                 <th class="border-bottom-0">Email</th>
-                                {{--                                <th class="border-bottom-0">Email Veified At</th>--}}
                                 <th class="border-bottom-0 text-center">Role</th>
                                 <th class="border-bottom-0">Status</th>
+                                @if(auth()->user()->hasPermission('admin user update') || auth()->user()->hasPermission('admin user destroy'))
                                 <th class="border-bottom-0">Action</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($users as $key => $user)
                                 <tr>
-                                    <td class="justify-content-center">
-                                        <input class="form-check form-check-label" style="width: 70px" type="checkbox" name="check">
-                                    </td>
+{{--                                    <td class="justify-content-center">--}}
+{{--                                        <input class="form-check form-check-label" style="width: 70px" type="checkbox" name="check">--}}
+{{--                                    </td>--}}
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    {{--                                    <td>{{ $user->email_verified_at  }}</td>--}}
                                     <td>
                                         @foreach($user->userRoles as $userRole)
                                             <span class="bg-primary p-1 rounded-2">{{ $userRole->role->name }}</span>
@@ -59,14 +55,20 @@
                                     <td class="col-2">
                                         <span class="p-1 {{$user->status == 1 ? 'bg-success':'bg-warning text-white'}}">{{$user->status == 1 ? 'Active':'Inactive'}}</span>
                                     </td>
+                                    @if(auth()->user()->hasPermission('admin user update') || auth()->user()->hasPermission('admin user destroy'))
                                     <td class="d-flex">
+                                        @if(auth()->user()->hasPermission('admin user update'))
                                         <a href="#" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#EditUser{{$key}}" ><i class="fa fa-edit"></i></a>
+                                        @endif
+                                        @if(auth()->user()->hasPermission('admin user destroy'))
                                         <form action="{{route('admin.user.destroy',$user->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('are you sure to delete ? ')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </form>
+                                        @endif
                                     </td>
+                                    @endif
                                 </tr>
                                 <div class="modal fade" id="EditUser{{$key}}">
                                     <div class="modal-dialog modal-dialog-centered task-view-modal" role="document">

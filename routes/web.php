@@ -59,7 +59,9 @@ Route::middleware(['admin.auth'])->prefix('admin/')->group(function () {
     });
     Route::controller(ArticleController::class)->group(function (){
         Route::get('/article','index')->name('admin.article.index');
+        Route::get('/article-create','create')->name('admin.article.create');
         Route::post('/article-store','store')->name('admin.article.store');
+        Route::get('/article-edit/{slug}','edit')->name('admin.article.edit');
         Route::put('/article-update/{id}','update')->name('admin.article.update');
         Route::delete('/article-destroy/{id}','destroy')->name('admin.article.destroy');
     });
@@ -99,8 +101,6 @@ Route::middleware(['admin.auth'])->prefix('admin/')->group(function () {
         Route::post('/cms-settings-update','update')->name('admin.cms.update');
         Route::put('/cms-settings-update-value','updateValue')->name('admin.cms.value.update');
     });
-
-
     Route::controller(SocialLinkController::class)->group(function () {
         Route::get('/social-link','index')->name('admin.social.link.index');
         Route::post('/social-link-store','store')->name('admin.social.link.store');
@@ -129,10 +129,6 @@ Route::middleware(['admin.auth'])->prefix('admin/')->group(function () {
         Route::put('/mission-update/{id}','update')->name('admin.mission.update');
         Route::delete('/mission-delete/{id}','destroy')->name('admin.mission.destroy');
     });
-
-
-
-
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 });
 /* Admin Panel End */

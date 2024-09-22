@@ -13,9 +13,11 @@
                     <div class="row">
                         <div class="card-header border-bottom justify-content-between">
                             <h3 class="card-title"> Top Bar Text</h3>
+                            @if(auth()->user()->hasPermission('admin topbar store'))
                             <a class="btn btn-primary px-5" data-bs-toggle="modal" data-bs-target="#addtopBar">
                                 ADD <i class="fa fa-plus"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -28,7 +30,9 @@
                                 <th class="border-bottom-0">Title</th>
                                 <th class="border-bottom-0">Serial</th>
                                 <th class="border-bottom-0">Status</th>
+                                @if(auth()->user()->hasPermission('admin topbar update') || auth()->user()->hasPermission('admin topbar destroy'))
                                 <th class="border-bottom-0">Action</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -40,14 +44,20 @@
                                         <span class="p-1 {{$topBar->status == 1 ? 'bg-success':'bg-danger'}}"> {{$topBar->status == 1 ? 'Active':'Inactive'}}</span>
                                     </td>
                                     <td>{{ $topBar->serial }}</td>
+                                    @if(auth()->user()->hasPermission('admin topbar update') || auth()->user()->hasPermission('admin topbar destroy'))
                                     <td class="d-flex">
+                                        @if(auth()->user()->hasPermission('admin topbar update'))
                                         <a href=""  data-bs-toggle="modal" data-bs-target="#edittopBar{{$key}}" class="btn btn-primary mx-2"><i class="fa fa-edit"></i></a>
+                                        @endif
+                                        @if(auth()->user()->hasPermission('admin topbar destroy'))
                                         <form action="{{route('admin.topbar.destroy',$topBar->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('are you sure to delete ? ')" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </form>
+                                        @endif
                                     </td>
+                                    @endif
                                 </tr>
                                 <div class="modal fade" id="edittopBar{{$key}}">
                                     <div class="modal-dialog modal-dialog-centered task-view-modal" role="document">

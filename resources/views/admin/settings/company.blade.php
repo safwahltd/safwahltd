@@ -120,7 +120,9 @@
                                 </div>
                             </div>
                         </div>
+                        @if(auth()->user()->hasPermission('admin company setting update'))
                         <button class="btn btn-primary float-end" type="submit">update</button>
+                        @endif
                     </form>
                 </div>
             </div>
