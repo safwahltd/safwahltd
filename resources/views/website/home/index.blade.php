@@ -91,7 +91,7 @@
                 <div class="col-lg-7 col-md-6 col-sm-12 wow fadeIn" data-wow-delay=".5s">
                     <h2 class="text-dark">About Us</h2>
                     <h3 class="mb-4">{{$about->title}}</h3>
-                    <p>{!! $about->description !!}</p>
+                    <p class="text-dark" align="justify">{!! $about->description !!}</p>
                 </div>
             </div>
         </div>
@@ -128,7 +128,7 @@
     <div class="container-fluid services py-5 mb-5" style="background-color: {{$cms->home_section_bg_color}}">
         <div class="container">
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
-                <h2 class="text-dark">Mission & Vision</h2>
+                <h2 class="text-dark">Mission Vision</h2>
             </div>
             <div class="row g-5 services-inner">
                 @foreach($missions as $mission)
