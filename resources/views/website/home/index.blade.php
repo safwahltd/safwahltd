@@ -19,8 +19,12 @@
                             <h6 class="text-white h4 animated fadeInUp">{{ $slider->title }}</h6>
                             <h3 class="text-white display-3 mb-4 animated fadeInRight">{{$slider->slogan}}</h3>
                             <p class="mb-4 text-white fs-5 animated fadeInDown">{{$slider->description}}</p>
-                            <a href="{{$slider->url}}" class="mx-2"><button type="button" style="border: 1px solid white" class="px-4 my-2 text-white py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn1 animated fadeInLeft">Read More</button></a>
-                            <a href="{{route('website.contact')}}" class="mx-2"><button type="button" style="border: 1px solid white" class="px-4 py-sm-3 px-sm-5 btn btn-primary text-white rounded-pill carousel-content-btn2 animated fadeInRight">Contact Us</button></a>
+                            <a href="{{$slider->url}}" class="mx-2">
+                                <button type="button" style="border: 1px solid white" class="px-4 my-2 text-white py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn1 animated fadeInLeft">Read More</button>
+                            </a>
+                            <a href="{{route('website.contact')}}" class="mx-2">
+                                <button type="button" style="border: 1px solid white" class="px-4 py-sm-3 px-sm-5 btn btn-primary text-white rounded-pill carousel-content-btn2 animated fadeInRight">Contact Us</button>
+                            </a>
                         </div>
                     </div>
                 </div>

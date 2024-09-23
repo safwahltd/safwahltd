@@ -46,8 +46,46 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="card my-2">
+                        <div class="card-header text-center">
+                            <h3 class="text-dark my-1 animated slideInDown">Facebook</h3>
+                        </div>
+                        <div class="card-body overflow-auto">
+                            <div class="card my-1">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div id="fb-root"></div>
+                                        <div class="fb-page"
+                                             data-href="https://www.facebook.com/safwahmartbd"
+                                             data-width=""
+                                             data-layout="button"
+                                             data-action="like"
+                                             data-size="small"
+                                             data-share="false">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                        </div>
+                    </div>
+                    <div class="card my-2">
+                        <div class="card-header text-center">
+                            <h3 class="text-dark my-1 animated slideInDown">Instagram</h3>
+                        </div>
+                        <div class="card-body overflow-auto">
+                            <a href="{{$article->url == '' ? route('website.article.details',$article->slug) : $article->url}}" target="{{$article->url == '' ? "" : '_blank'}}">
+                                <div class="card my-1">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/safwahmart/" data-instgrm-version="12" style="max-width:540px; min-width:326px; width:99%; margin:auto;"></blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
