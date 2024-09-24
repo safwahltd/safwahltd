@@ -15,7 +15,7 @@
                                 <img src="{{asset($article->thumbnail)}}" class="img-fluid w-100 rounded-top" alt="{{$article->title}}">
                                 <div class="blog-content text-center position-relative px-3 pt-5" style="margin-top: -25px;">
                                     <span class="text-dark">{{\Carbon\Carbon::parse($article->created_at)->format('d M, Y')}}</span>
-                                    <h5 class="py-2">{{$article->title}}</h5>
+                                    <h5 class="py-2" style="font-family: Times New Roman, Times, serif;">{{$article->title}}</h5>
                                 </div>
                             </a>
                         </div>

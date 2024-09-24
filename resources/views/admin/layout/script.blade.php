@@ -63,36 +63,6 @@
 {{-- Success or fail message--}}
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
 
-
-
-{{--<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>--}}
-{{--{!! Toastr::message() !!}--}}
-
-
-{{--@stack('js')--}}
-
-{{--<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>--}}
-
-
-{{--<script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#categoryImage').attr('src', e.target.result);
-                $('#categoryImage').attr('height', '100');
-                $('#categoryImage').attr('width', '120');
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $("#imgInp").change(function(){
-        readURL(this);
-    });
-</script>--}}
-
-
-
 <!-- DATA TABLE JS-->
 <script src="{{asset('/')}}admin/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
 <script src="{{asset('/')}}admin/assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
