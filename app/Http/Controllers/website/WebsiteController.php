@@ -20,7 +20,7 @@ class WebsiteController extends Controller
         $coreValues = CoreValue::where('status',1)->orderBy('serial','asc')->get();
         $concerns = Concern::where('status',1)->orderBy('serial','asc')->get();
         $products = Product::where('status',1)->orderBy('serial','asc')->get();
-        $articles = Article::where('status',1)->latest()->get()->take(3);
+        $articles = Article::where('status',1)->latest()->get()->take(4);
         $shops = AvailableShop::where('status',1)->orderBy('serial','asc')->get();
         $missions = MissionVision::where('status',1)->orderBy('serial','asc')->get();
         return view('website.home.index',compact('sliders','coreValues','concerns','products','articles','shops','missions'));
