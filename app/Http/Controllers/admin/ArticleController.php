@@ -115,9 +115,14 @@ class ArticleController extends Controller
                 toastr()->error($validate->messages());
                 return back();
             }
+            if ($article->title == $request->title){
+                $article->slug = $article->slug;
+            }
+            else{
+                $article->slug = createUniqueSlug($request->title, Article::class);
+            }
 
             $article->title = $request->title;
-            $article->slug = createUniqueSlug($request->title, Article::class);
             $article->short_description = $request->short_description;
             $article->long_description = $request->long_description;
             if ($request->file('thumbnail')){

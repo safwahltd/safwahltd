@@ -90,8 +90,8 @@
                 </div>
                 <div class="col-lg-7 col-md-6 col-sm-12 wow fadeIn" data-wow-delay=".5s">
                     <h2 class="text-dark">About Us</h2>
-                    <h3 class="mb-4">{{$about->title}}</h3>
-                    <p>{!! $about->description !!}</p>
+                    <h3 class="mb-4" style="font-family: Times New Roman, Times, serif;">{{$about->title}}</h3>
+                    <p class="text-dark" align="justify" style="font-family: Times New Roman, Times, serif;">{!! $about->description !!}</p>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
                         <div class="text-center">
                             <div class="">
                                 <img class="mb-2" src="{{asset($coreValue->icon)}}" width="250"  alt="{{$coreValue->title}}">
-                                <h5 class="mb-3 p-2 text-dark">{{$coreValue->title}}</h5>
+                                <h5 class="mb-3 p-2 text-dark" style="font-family: Times New Roman, Times, serif;">{{$coreValue->title}}</h5>
                             </div>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
     <div class="container-fluid services py-5 mb-5" style="background-color: {{$cms->home_section_bg_color}}">
         <div class="container">
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
-                <h2 class="text-dark">Mission & Vision</h2>
+                <h2 class="text-dark " style="font-family: Times New Roman, Times, serif;">Mission & Vision</h2>
             </div>
             <div class="row g-5 services-inner">
                 @foreach($missions as $mission)
@@ -137,8 +137,8 @@
                             <div class="text-center">
                                 <div class="">
                                     <img class="mb-2" src="{{asset($mission->image)}}" width="250"  alt="{{$mission->title}}">
-                                    <h5 class="mb-3 px-2 text-white">{{$mission->title}}</h5>
-                                    <p class="mb-3 px-2 text-white">{{$mission->description}}</p>
+                                    <h5 class="mb-3 px-2 text-white"  style="font-family: Times New Roman, Times, serif;">{{$mission->title}}</h5>
+                                    <p class="mb-3 px-2 text-white" style="font-family: Times New Roman, Times, serif;">{{$mission->description}}</p>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                             <img src="{{asset($concern->banner)}}" class="img-fluid w-100 rounded" alt="{{$concern->name}}">
                             <div class="project-content">
                                 <a href="{{$concern->url}}" target="_blank" class="text-center">
-                                    <h4 class="text-white">{{$concern->name}}</h4>
+                                    <h4 class="text-white" style="font-family: Times New Roman, Times, serif;">{{$concern->name}}</h4>
                                 </a>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                                 </a>
                             </div>
                             <div class="team-name text-center py-3">
-                                <h6 class="">{{$product->name}}</h6>
+                                <h6 class="" style="font-family: Times New Roman, Times, serif;">{{$product->name}}</h6>
                             </div>
                         </div>
                     </div>
@@ -237,7 +237,7 @@
                             <img src="{{asset($article->thumbnail)}}" class="img-fluid w-100 rounded-top" alt="{{$article->title}}">
                             <div class="blog-content text-center position-relative px-3 pt-5" style="margin-top: -25px;">
                                 <span class="text-dark">{{\Carbon\Carbon::parse($article->created_at)->format('d M, Y')}}</span>
-                                <h5 class="py-2">{{$article->title}}</h5>
+                                <h5 class="py-2" style="font-family: Times New Roman, Times, serif;">{{$article->title}}</h5>
                             </div>
                         </a>
 

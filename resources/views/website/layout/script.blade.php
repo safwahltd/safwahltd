@@ -55,7 +55,8 @@
     toastr.error("{{ Session::get('error') }}");
     @endif
 </script>
-{{--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0"></script>--}}
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0"></script>
 <script async src="//www.instagram.com/embed.js"></script>
-<script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0" nonce="6gkp9BQx"></script>
+{{--<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0" nonce="6gkp9BQx"></script>--}}
+{{--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0"></script>--}}

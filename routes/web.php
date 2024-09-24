@@ -19,6 +19,7 @@ use App\Http\Controllers\admin\TopbarController;
 use App\Http\Controllers\admin\MissionVisionController;
 use App\Http\Controllers\website\ContactController;
 use App\Http\Controllers\WebsiteCMSController;
+use App\Http\Controllers\admin\PostPageLinkController;
 
 
 /* Website Start*/
@@ -129,6 +130,13 @@ Route::middleware(['admin.auth'])->prefix('admin/')->group(function () {
         Route::put('/mission-update/{id}','update')->name('admin.mission.update');
         Route::delete('/mission-delete/{id}','destroy')->name('admin.mission.destroy');
     });
+    Route::controller(PostPageLinkController::class)->group(function () {
+        Route::get('/post-page-link','index')->name('admin.post.page.index');
+        Route::post('/post-page-link-store','store')->name('admin.post.page.store');
+        Route::put('/post-page-link-update/{id}','update')->name('admin.post.page.update');
+        Route::delete('/post-page-link-delete/{id}','destroy')->name('admin.post.page.destroy');
+    });
+
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 });
 /* Admin Panel End */

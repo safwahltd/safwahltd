@@ -7,6 +7,7 @@ use App\Models\AvailableShop;
 use App\Models\Concern;
 use App\Models\CoreValue;
 use App\Models\MissionVision;
+use App\Models\PostPageLink;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -34,7 +35,8 @@ class WebsiteController extends Controller
     public function articleDetails($slug){
         $article = Article::where('slug',$slug)->where('status',1)->first();
         $articles = Article::whereNotIn('id',[$article->id])->get()->take(10);
-        return view('website.article.article-details',compact('article','articles'));
+        $links = PostPageLink::where('article_id',$article->id)->get();
+        return view('website.article.article-details',compact('article','articles','links'));
     }
     public function bulkOrder(){
         return view('website.bulk-order.index');
