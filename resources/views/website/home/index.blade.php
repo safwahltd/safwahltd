@@ -186,7 +186,7 @@
                     <div class="team-content">
                         <div class="team-img-icon">
                             <div class="team-img">
-                                <a href="{{$product->url}}">
+                                <a href="{{$product->url}}" target="_blank">
                                     <img src="{{asset($product->banner)}}" class="img-fluid w-100" alt="{{$product->name}}">
                                 </a>
                             </div>
@@ -209,7 +209,7 @@
             </div>
             <div class="row g-5">
                 @foreach($shops as $shop)
-                    <div class="col-md-4 col-6 col-lg-2 wow fadeIn" data-wow-delay=".3s">
+                    <div class="col-md-4 col-6 col-lg-2 mb-1 wow fadeIn" data-wow-delay=".3s">
                         <div class="project-item">
                             <div class="project-img">
                                 <a href="{{$shop->url}}" target="_blank" class="text-center">
@@ -229,9 +229,9 @@
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
                 <h2 class="text-dark">Articles</h2>
             </div>
-            <div class="row g-5 justify-content-center">
+            <div class="row g-5">
                 @foreach($articles as $article)
-                <div class="col-lg-6 col-xl-4 wow fadeIn" data-wow-delay=".3s">
+                <div class="col-lg-6 col-xl-3 wow fadeIn" data-wow-delay=".3s">
                     <div class="blog-item position-relative bg-light rounded">
                         <a href="{{$article->url == '' ? route('website.article.details',$article->slug) : $article->url}}" target="{{$article->url == '' ? "" : '_blank'}}">
                             <img src="{{asset($article->thumbnail)}}" class="img-fluid w-100 rounded-top" alt="{{$article->title}}">
