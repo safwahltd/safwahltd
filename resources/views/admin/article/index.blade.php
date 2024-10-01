@@ -156,7 +156,6 @@
                                                         <h3 class="card-title">{{ $article->title }}</h3>
                                                     </div>
                                                     <div class="card-body">
-                                                        <h6 ><span style="background-color: orangered" class="rounded-2 text-white p-1 fw-bold">Slug : {{ $article->slug }}</span></h6>
                                                         <div class="row mb-4">
                                                             <div class="col-md-4">
                                                                 <img src="{{asset($article->thumbnail)}}" class="img-fluid img-responsive my-2" width="500" alt="">

@@ -10,6 +10,7 @@ use App\Mail\WholeSalerMailReply;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Validator;
@@ -31,16 +32,24 @@ class ContactController extends Controller
                 toastr()->error($validate->messages());
                 return back();
             }
-            // Dynamically configure the email settings
-            config([
-                'mail.mailers.smtp.host' => $mail->mail_host,
-                'mail.mailers.smtp.port' => $mail->mail_port,
-                'mail.mailers.smtp.username' => $mail->mail_username,
-                'mail.mailers.smtp.password' => $mail->mail_password,
-                'mail.mailers.smtp.encryption' => $mail->mail_encryption,
-                'mail.from.address' => $mail->sender_email,
-                'mail.from.name' => $mail->sender_name,
-            ]);
+            // Dynamically set email configurations
+            Config::set('mail.default', $mail->mail_mailer); // Ensure you're using the right mailer
+
+            // Set SMTP settings dynamically
+            Config::set('mail.mailers.smtp.host', $mail->mail_host);
+            Config::set('mail.mailers.smtp.port', $mail->mail_port);
+            Config::set('mail.mailers.smtp.username', $mail->mail_username);
+            Config::set('mail.mailers.smtp.password', $mail->mail_password);
+            Config::set('mail.mailers.smtp.encryption', $mail->mail_encryption);
+
+            // Set "from" address
+            Config::set('mail.from.address', $mail->sender_email);
+            Config::set('mail.from.name', $mail->sender_name);
+
+            // Clear the resolved instance of the mailer, so the new configuration is used
+            app()->forgetInstance('mailer');
+            app()->make('mailer');
+
             $data = $request->all();
             Mail::to($mail->sender_email)->send(new ContactMail($data));
             Mail::to($request->email)->send(new contactMailReply($data));
@@ -67,16 +76,24 @@ class ContactController extends Controller
                 toastr()->error($validate->messages());
                 return back();
             }
-            // Dynamically configure the email settings
-            config([
-                'mail.mailers.smtp.host' => $mail->mail_host,
-                'mail.mailers.smtp.port' => $mail->mail_port,
-                'mail.mailers.smtp.username' => $mail->mail_username,
-                'mail.mailers.smtp.password' => $mail->mail_password,
-                'mail.mailers.smtp.encryption' => $mail->mail_encryption,
-                'mail.from.address' => $mail->sender_email,
-                'mail.from.name' => $mail->sender_name,
-            ]);
+            // Dynamically set email configurations
+            Config::set('mail.default', $mail->mail_mailer); // Ensure you're using the right mailer
+
+            // Set SMTP settings dynamically
+            Config::set('mail.mailers.smtp.host', $mail->mail_host);
+            Config::set('mail.mailers.smtp.port', $mail->mail_port);
+            Config::set('mail.mailers.smtp.username', $mail->mail_username);
+            Config::set('mail.mailers.smtp.password', $mail->mail_password);
+            Config::set('mail.mailers.smtp.encryption', $mail->mail_encryption);
+
+            // Set "from" address
+            Config::set('mail.from.address', $mail->sender_email);
+            Config::set('mail.from.name', $mail->sender_name);
+
+            // Clear the resolved instance of the mailer, so the new configuration is used
+            app()->forgetInstance('mailer');
+            app()->make('mailer');
+
             $data = $request->all();
             Mail::to($mail->sender_email)->send(new BulkOrderMail($data));
             Mail::to($request->email)->send(new BulkOrderMailReply($data));
@@ -104,16 +121,24 @@ class ContactController extends Controller
                 toastr()->error($validate->messages());
                 return back();
             }
-            // Dynamically configure the email settings
-            config([
-                'mail.mailers.smtp.host' => $mail->mail_host,
-                'mail.mailers.smtp.port' => $mail->mail_port,
-                'mail.mailers.smtp.username' => $mail->mail_username,
-                'mail.mailers.smtp.password' => $mail->mail_password,
-                'mail.mailers.smtp.encryption' => $mail->mail_encryption,
-                'mail.from.address' => $mail->sender_email,
-                'mail.from.name' => $mail->sender_name,
-            ]);
+            // Dynamically set email configurations
+            Config::set('mail.default', $mail->mail_mailer); // Ensure you're using the right mailer
+
+            // Set SMTP settings dynamically
+            Config::set('mail.mailers.smtp.host', $mail->mail_host);
+            Config::set('mail.mailers.smtp.port', $mail->mail_port);
+            Config::set('mail.mailers.smtp.username', $mail->mail_username);
+            Config::set('mail.mailers.smtp.password', $mail->mail_password);
+            Config::set('mail.mailers.smtp.encryption', $mail->mail_encryption);
+
+            // Set "from" address
+            Config::set('mail.from.address', $mail->sender_email);
+            Config::set('mail.from.name', $mail->sender_name);
+
+            // Clear the resolved instance of the mailer, so the new configuration is used
+            app()->forgetInstance('mailer');
+            app()->make('mailer');
+
             $data = $request->all();
             Mail::to($mail->sender_email)->send(new WholeSalerMail($data));
             Mail::to($request->email)->send(new WholeSalerMailReply($data));

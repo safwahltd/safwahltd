@@ -10,7 +10,7 @@
             <div class="row g-5">
                 @foreach($articles as $article)
                     <div class="col-lg-6 col-xl-3" data-wow-delay=".3s">
-                        <div class="blog-item position-relative bg-light rounded">
+                        <div class="blog-item position-relative bg-light rounded" style="height:370px">
                             <a href="{{$article->url == '' ? route('website.article.details',$article->slug) : $article->url}}" target="{{$article->url == '' ? "" : '_blank'}}">
                                 <img src="{{asset($article->thumbnail)}}" class="img-fluid w-100 rounded-top" alt="{{$article->title}}">
                                 <div class="blog-content text-center position-relative px-3 pt-5" style="margin-top: -25px;">

@@ -69,7 +69,7 @@
                                             <div class="modal-body">
                                                 <div class="card">
                                                     <div class="card-header border-bottom justify-content-between">
-                                                        <h3 class="card-title"><i class="fa fa-credit-card-alt"></i> Edit Core Values </h3>
+                                                        <h3 class="card-title"> Edit Core Values </h3>
                                                     </div>
                                                     <div class="card-body">
                                                         <form class="form-horizontal" action="{{route('admin.core.value.update',$coreValue->id )}}" method="post" enctype="multipart/form-data">
@@ -139,7 +139,7 @@
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-header border-bottom justify-content-between">
-                            <h3 class="card-title"><i class="fa fa-credit-card-alt"></i> Create New</h3>
+                            <h3 class="card-title"> Create New</h3>
                         </div>
                         <div class="card-body">
                             <form class="form-horizontal" action="{{route('admin.core.value.store')}}" method="post" enctype="multipart/form-data">

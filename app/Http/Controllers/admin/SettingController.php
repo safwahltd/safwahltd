@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Support\Facades\Config;
 
 class SettingController extends Controller
 {
@@ -72,6 +73,17 @@ class SettingController extends Controller
             $setting->mail_username = $request->mail_username;
             $setting->mail_password = $request->mail_password;
             $setting->save();
+
+            // Set dynamic email configurations
+            Config::set('mail.mailers.smtp.mailer', $setting->mail_mailer);
+            Config::set('mail.mailers.smtp.host', $setting->mail_host);
+            Config::set('mail.mailers.smtp.port', $setting->mail_port);
+            Config::set('mail.mailers.smtp.username', $setting->mail_username);
+            Config::set('mail.mailers.smtp.password', $setting->mail_password);
+            Config::set('mail.mailers.smtp.encryption', $setting->mail_encryption);
+            Config::set('mail.from.address', $setting->sender_email);
+            Config::set('mail.from.name', $setting->sender_name);
+
             toastr()->success('update success.');
             return back();
         }

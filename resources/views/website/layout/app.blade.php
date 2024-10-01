@@ -15,6 +15,8 @@
 </head>
 
 <body style="font-family: Times New Roman, Times, serif;">
+
+
 <!-- Spinner Start -->
 
 <div id="spinner" class="{{$cms->loading_image_status == 1 ? 'show':''}} position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -39,7 +41,7 @@
 
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-dark btn-square rounded-circle back-to-top"><i class="fa fa-arrow-up text-white"></i></a>
+<a href="#" class="btn btn-square rounded-circle back-to-top" style="background-color: #969393"><i class="fa fa-arrow-up text-white"></i></a>
 
 
 @include('website.layout.script')
