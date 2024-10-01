@@ -65,7 +65,7 @@
                                             <div class="modal-body">
                                                 <div class="card">
                                                         <div class="card-header border-bottom justify-content-between">
-                                                            <h3 class="card-title"><i class="fa fa-credit-card-alt"></i> Edit Concern</h3>
+                                                            <h3 class="card-title"> Edit Concern</h3>
                                                         </div>
                                                         <div class="card-body">
                                                             <form class="form-horizontal" action="{{route('admin.concern.update',$concern->id )}}" method="post" enctype="multipart/form-data">
@@ -131,7 +131,7 @@
                                             <div class="modal-body">
                                                 <div class="card">
                                                     <div class="card-header border-bottom justify-content-between">
-                                                        <h3 class="card-title"><i class="fa fa-credit-card-alt"></i> Show Concern </h3>
+                                                        <h3 class="card-title"> Show Concern </h3>
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="row mb-4">
@@ -203,7 +203,7 @@
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-header border-bottom justify-content-between">
-                            <h3 class="card-title"><i class="fa fa-credit-card-alt"></i> Create New</h3>
+                            <h3 class="card-title"> Create New</h3>
                         </div>
                         <div class="card-body">
                             <form class="form-horizontal" action="{{route('admin.concern.store')}}" method="post" enctype="multipart/form-data">

@@ -16,12 +16,12 @@
                     <img src="{{asset($slider->banner)}}" class="img-fluid" alt="{{ $slider->title }}">
                     <div class="carousel-caption">
                         <div class="container carousel-content">
-                            <h6 class="text-white h4 animated fadeInUp">{{ $slider->title }}</h6>
-                            <h3 class="text-white display-3 mb-4 animated fadeInRight">{{$slider->slogan}}</h3>
+                            <h6 class="text-white display-6 animated fadeInUp">{{ $slider->title }}</h6>
+                            <h4 class="text-white display-4 mb-4 animated fadeInRight">{{$slider->slogan}}</h4>
                             <p class="mb-4 text-white fs-5 animated fadeInDown">{{$slider->description}}</p>
-                            <a href="{{$slider->url}}" class="mx-2">
+                            {{--<a href="{{$slider->url}}" class="mx-2">
                                 <button type="button" style="border: 1px solid white" class="px-4 my-2 text-white py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn1 animated fadeInLeft">Read More</button>
-                            </a>
+                            </a>--}}
                             <a href="{{route('website.contact')}}" class="mx-2">
                                 <button type="button" style="border: 1px solid white" class="px-4 py-sm-3 px-sm-5 btn btn-primary text-white rounded-pill carousel-content-btn2 animated fadeInRight">Contact Us</button>
                             </a>
@@ -106,13 +106,13 @@
                 <h2 class="text-dark">Core Values</h2>
 {{--                <h1>Services Built Specifically For Your Business</h1>--}}
             </div>
-            <div class="row g-5 services-inner">
+            <div class="row g-lg-5 g-2 services-inner justify-content-lg-start justify-content-center">
                 @foreach($coreValues as $coreValue)
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay=".3s">
+                <div class="col-md-6 col-lg-3 col-10 wow fadeIn" data-wow-delay=".3s">
                     <div class="services-item">
                         <div class="text-center">
                             <div class="">
-                                <img class="mb-2" src="{{asset($coreValue->icon)}}" width="250"  alt="{{$coreValue->title}}">
+                                <img class="mb-2 p-1 img-fluid  rounded-2" src="{{asset($coreValue->icon)}}" width="250"  alt="{{$coreValue->title}}">
                                 <h5 class="mb-3 p-2 text-dark" style="font-family: Times New Roman, Times, serif;">{{$coreValue->title}}</h5>
                             </div>
                         </div>
@@ -130,15 +130,15 @@
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
                 <h2 class="text-dark " style="font-family: Times New Roman, Times, serif;">Mission & Vision</h2>
             </div>
-            <div class="row g-5 services-inner">
+            <div class="row  g-lg-5 g-2 services-inner justify-content-lg-start justify-content-center">
                 @foreach($missions as $mission)
-                    <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay=".3s">
-                        <div class="services-item bg-dark">
+                    <div class="col-md-6 col-lg-3 col-10 wow fadeIn" data-wow-delay=".3s">
+                        <div class="services-item bg-white">
                             <div class="text-center">
                                 <div class="">
-                                    <img class="mb-2" src="{{asset($mission->image)}}" width="250"  alt="{{$mission->title}}">
-                                    <h5 class="mb-3 px-2 text-white"  style="font-family: Times New Roman, Times, serif;">{{$mission->title}}</h5>
-                                    <p class="mb-3 px-2 text-white" style="font-family: Times New Roman, Times, serif;">{{$mission->description}}</p>
+                                    <img class="mb-2  p-1 img-fluid rounded-2" src="{{asset($mission->image)}}" width="250"  alt="{{$mission->title}}">
+                                    <h5 class="mb-3 px-2 text-dark"  style="font-family: Times New Roman, Times, serif;">{{$mission->title}}</h5>
+                                    <p class="mb-3 px-2 text-dark" style="font-family: Times New Roman, Times, serif;">{{$mission->description}}</p>
                                 </div>
                             </div>
                         </div>
@@ -232,7 +232,7 @@
             <div class="row g-5">
                 @foreach($articles as $article)
                 <div class="col-lg-6 col-xl-3 wow fadeIn" data-wow-delay=".3s">
-                    <div class="blog-item position-relative bg-light rounded">
+                    <div class="blog-item position-relative bg-light rounded" style="height:370px">
                         <a href="{{$article->url == '' ? route('website.article.details',$article->slug) : $article->url}}" target="{{$article->url == '' ? "" : '_blank'}}">
                             <img src="{{asset($article->thumbnail)}}" class="img-fluid w-100 rounded-top" alt="{{$article->title}}">
                             <div class="blog-content text-center position-relative px-3 pt-5" style="margin-top: -25px;">
@@ -245,7 +245,7 @@
                 </div>
                 @endforeach
             </div>
-            <div class="text-center my-2">
+            <div class="text-center my-4">
                 <a href="{{route('website.articles')}}" class="btn btn-dark">More Articles</a>
             </div>
         </div>

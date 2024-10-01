@@ -72,9 +72,8 @@
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                         <i class="side-menu__icon text-white fa fa-regular fa-newspaper"></i>
-                        <span class="side-menu__label">Articles</span><i class="angle fa fa-angle-right"></i></a>
+                        <span class="side-menu__label text-white">Articles</span><i class="angle fa fa-angle-right"></i></a>
                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)">Sub-menus</a></li>
                         <li><a href="{{route('admin.article.index')}}" class="slide-item">Article</a></li>
                         <li><a href="{{route('admin.post.page.index')}}" class="slide-item">Page/Post Link</a></li>
                     </ul>

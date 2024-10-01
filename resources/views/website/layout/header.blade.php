@@ -13,12 +13,12 @@
             </button>
             <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
                 <div class="navbar-nav ms-auto mx-xl-auto p-0">
-                    <a href="{{route('website.index')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.index' ? 'background-color: #a89a9a':''}}">HOME</a>
+                    <a href="{{route('website.index')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.index' ? 'background-color: #a89a9a':''}}; font-size: 17px">HOME</a>
                     <a href="{{route('website.index')}}#about_us" class="nav-item nav-link text-dark">ABOUT US</a>
-                    <a href="{{route('website.articles')}}" class="nav-item active nav-link" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.articles' ? 'background-color: #a89a9a':''}}">ARTICLES</a>
-                    <a href="{{route('bulk.order')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='bulk.order' ? 'background-color: #a89a9a':''}}">BULK ORDER</a>
-                    <a href="{{route('become.wholesaler')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='become.wholesaler' ? 'background-color: #a89a9a':''}}">BECOME WHOLESALER</a>
-                    <a href="{{route('website.contact')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.contact' ? 'background-color: #a89a9a':''}}">CONTACT</a>
+                    <a href="{{route('website.articles')}}" class="nav-item active nav-link" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.articles' ? 'background-color: #a89a9a':''}}; font-size: 17px">ARTICLES</a>
+                    <a href="{{route('bulk.order')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='bulk.order' ? 'background-color: #a89a9a':''}}; font-size: 17px">BULK ORDER</a>
+                    <a href="{{route('become.wholesaler')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='become.wholesaler' ? 'background-color: #a89a9a':''}}; font-size: 17px">BECOME WHOLESALER</a>
+                    <a href="{{route('website.contact')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.contact' ? 'background-color: #a89a9a':''}}; font-size: 17px">CONTACT</a>
                 </div>
             </div>
 

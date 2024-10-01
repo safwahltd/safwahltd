@@ -10,7 +10,7 @@
                             <h3 class="card-title">Article</h3>
                             @if(auth()->user()->hasPermission('admin article index'))
                                 <a class="btn btn-primary px-5" href="{{route('admin.article.index')}}">
-                                    List <i class="fa fa-plus"></i>
+                                    List <i class="fa fa-list"></i>
                                 </a>
                             @endif
                         </div>
