@@ -87,6 +87,16 @@
                     </a>
                 </li>
                 @endif
+                @if(auth()->user()->hasPermission('admin gallery index'))
+                <li class="slide">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('admin.gallery.index')}}">
+                        <i class="side-menu__icon text-white fa fa-image"></i>
+                        <span class="side-menu__label text-white">Gallery</span>
+                    </a>
+                </li>
+                @endif
+
+
                 {{--@if(auth()->user()->hasPermission('admin shop index'))
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="javascript:void(0)">
@@ -126,13 +136,11 @@
                         @if(auth()->user()->hasPermission('admin cms index'))
                             <li><a href="{{route('admin.cms.index')}}" class="slide-item text-white">Website CMS</a></li>
                         @endif
-
-
 {{--                        <li><a href="{{route('admin.dashboard')}}" class="slide-item text-white">CMS Setting</a></li>--}}
                     </ul>
                 </li>
                 @endif
-                @if(auth()->user()->hasPermission('admin user index') || auth()->user()->hasPermission('admin role index') || auth()->user()->hasPermission('admin permission index'))
+                @if(auth()->user()->hasPermission('admin user index') || auth()->user()->hasPermission('admin role index') || auth()->user()->hasPermission('admin permission index') || auth()->user()->hasPermission('admin pass change'))
                     <li class="slide">
                         <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                             <i class="side-menu__icon text-white fa-solid fa-key"></i>
@@ -149,6 +157,13 @@
                             @if(auth()->user()->hasPermission('admin permission index'))
                                 <li><a href="{{route('admin.permission.index')}}" class="slide-item text-white">Permission</a></li>
                             @endif
+                            @if(auth()->user()->hasPermission('admin user details'))
+                                <li><a href="{{route('admin.user.details')}}" class="slide-item text-white">Account Details</a></li>
+                            @endif
+                            @if(auth()->user()->hasPermission('admin pass change'))
+                                <li><a href="{{route('admin.pass.change')}}" class="slide-item text-white">Password Change</a></li>
+                            @endif
+
                         </ul>
                     </li>
                     @endif

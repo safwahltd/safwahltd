@@ -17,5 +17,3 @@
 
 <!-- Template Stylesheet -->
 <link href="{{asset('/')}}website/css/style.css" rel="stylesheet">
-
-<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">

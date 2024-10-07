@@ -20,14 +20,14 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        $email = 'admin@gmail.com';
+        $email = 'info@safwahltd.com';
         $user = User::where('email',$email)->first();
         if (!$user){
             \App\Models\User::create([
                 'id' => 1,
                 'name' => 'Super Admin',
                 'email' => $email,
-                'password' => bcrypt('admin@gmail.com'),
+                'password' => bcrypt('info@safwahltd.com'),
                 'role' => 'admin',
             ]);
         }
