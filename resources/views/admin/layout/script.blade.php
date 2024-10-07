@@ -84,8 +84,6 @@
 
 <!-- INTERNAL DATATABLES JS -->
 <script src="{{ asset('/') }}admin/assets/js/table-editable.js"></script>
-<!-- SELECT2 JS -->
-<script src="{{asset('/')}}admin/assets/plugins/select2/select2.full.min.js"></script>
 
 <!-- SELECT2 JS -->
 <script src="{{ asset('/') }}admin/assets/plugins/select2/select2.full.min.js"></script>

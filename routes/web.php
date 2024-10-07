@@ -20,6 +20,7 @@ use App\Http\Controllers\admin\MissionVisionController;
 use App\Http\Controllers\website\ContactController;
 use App\Http\Controllers\WebsiteCMSController;
 use App\Http\Controllers\admin\PostPageLinkController;
+use App\Http\Controllers\admin\GalleryController;
 
 
 /* Website Start*/
@@ -27,12 +28,13 @@ Route::get('/',[WebsiteController::class,'index'])->name('website.index');
 Route::get('/article',[WebsiteController::class,'article'])->name('website.articles');
 Route::get('/article-details/{slug}',[WebsiteController::class,'articleDetails'])->name('website.article.details');
 Route::get('/about-us',[WebsiteController::class,'about'])->name('website.about');
-Route::get('/contact-us',[WebsiteController::class,'contact'])->name('website.contact');
+Route::get('/contact',[WebsiteController::class,'contact'])->name('website.contact');
 Route::post('/contact-submit', [ContactController::class, 'contactSubmit'])->name('contact.submit');
 Route::get('/bulk-order', [WebsiteController::class, 'bulkOrder'])->name('bulk.order');
 Route::post('/bulk-order-submit', [ContactController::class, 'bulkOrderSubmit'])->name('bulk.order.submit');
 Route::get('/become-wholesaler', [WebsiteController::class, 'becomeWholesaler'])->name('become.wholesaler');
 Route::post('/become-wholesaler-submit', [ContactController::class, 'becomeWholesalerSubmit'])->name('become.wholesaler.submit');
+Route::get('/gallery', [GalleryController::class, 'gallery'])->name('website.gallery');
 
 /* Website End*/
 /* Admin Panel Start */
@@ -136,6 +138,16 @@ Route::middleware(['admin.auth'])->prefix('admin/')->group(function () {
         Route::put('/post-page-link-update/{id}','update')->name('admin.post.page.update');
         Route::delete('/post-page-link-delete/{id}','destroy')->name('admin.post.page.destroy');
     });
+    Route::controller(GalleryController::class)->group(function () {
+        Route::get('/gallery','index')->name('admin.gallery.index');
+        Route::post('/gallery-store','store')->name('admin.gallery.store');
+        Route::put('/gallery-update/{id}','update')->name('admin.gallery.update');
+        Route::delete('/gallery-delete/{id}','destroy')->name('admin.gallery.destroy');
+    });
+    Route::get('/update-details',[AdminAuthController::class,'userDetails'])->name('admin.user.details');
+    Route::put('/update-details-update',[AdminAuthController::class,'userDetailsUpdate'])->name('admin.user.details.update');
+    Route::get('/update-password',[AdminAuthController::class,'userPasswordChange'])->name('admin.pass.change');
+    Route::put('/update-password-submit',[AdminAuthController::class,'userPasswordChangeSubmit'])->name('admin.pass.update');
 
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 });

@@ -1,3 +1,7 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
 <!-- JavaScript Libraries -->
 <script src="{{asset('/')}}website/ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="{{asset('/')}}website/cdn.jsdelivr.net/npm/bootstrap%405.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -5,7 +9,6 @@
 <script src="{{asset('/')}}website/lib/easing/easing.min.js"></script>
 <script src="{{asset('/')}}website/lib/waypoints/waypoints.min.js"></script>
 <script src="{{asset('/')}}website/lib/owlcarousel/owl.carousel.min.js"></script>
-
 <!-- Template Javascript -->
 <script src="{{asset('/')}}website/js/main.js"></script>
 
@@ -57,6 +60,8 @@
 </script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0"></script>
 <script async src="//www.instagram.com/embed.js"></script>
+
+@stack('js')
 {{--<script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0" nonce="6gkp9BQx"></script>--}}
 {{--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0"></script>--}}
@@ -73,3 +78,4 @@
     })();
 </script>
 <!--End of Tawk.to Script-->--}}
+

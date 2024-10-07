@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Validator;
+use Brian2694\Toastr\Facades\Toastr;
 
 class ContactController extends Controller
 {

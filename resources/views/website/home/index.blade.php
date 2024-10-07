@@ -1,5 +1,5 @@
 @extends('website.layout.app')
-@section('title','Home Page')
+@section('title','A Path For Prosperity')
 @section('body')
     <!-- Carousel Start -->
     @if($cms->slider == 1)
@@ -17,7 +17,7 @@
                     <div class="carousel-caption">
                         <div class="container carousel-content">
                             <h6 class="text-white display-6 animated fadeInUp">{{ $slider->title }}</h6>
-                            <h4 class="text-white display-4 mb-4 animated fadeInRight">{{$slider->slogan}}</h4>
+                            <h5 class="text-white display-lg-4 display-5 mb-4 animated fadeInRight">{{$slider->slogan}}</h5>
                             <p class="mb-4 text-white fs-5 animated fadeInDown">{{$slider->description}}</p>
                             {{--<a href="{{$slider->url}}" class="mx-2">
                                 <button type="button" style="border: 1px solid white" class="px-4 my-2 text-white py-sm-3 px-sm-5 btn btn-primary rounded-pill carousel-content-btn1 animated fadeInLeft">Read More</button>
@@ -175,7 +175,7 @@
     </div>
     <!-- Concern End -->
     <!-- Products Start -->
-    <div class="container-fluid py-5 mb-5 team" style="background-color: {{$cms->home_section_bg_color}}">
+    <div class="container-fluid py-5 mb-5 team" style="background-color: {{$cms->home_section_bg_color}}" id="productSection">
         <div class="container">
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
                 <h2 class="text-dark">Products</h2>
