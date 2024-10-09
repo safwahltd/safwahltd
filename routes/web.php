@@ -143,6 +143,7 @@ Route::middleware(['admin.auth'])->prefix('admin/')->group(function () {
         Route::post('/gallery-store','store')->name('admin.gallery.store');
         Route::put('/gallery-update/{id}','update')->name('admin.gallery.update');
         Route::delete('/gallery-delete/{id}','destroy')->name('admin.gallery.destroy');
+        Route::get('/download-image/{image}','downloadImage')->name('admin.gallery.download');
     });
     Route::get('/update-details',[AdminAuthController::class,'userDetails'])->name('admin.user.details');
     Route::put('/update-details-update',[AdminAuthController::class,'userDetailsUpdate'])->name('admin.user.details.update');

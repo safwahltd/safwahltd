@@ -1,23 +1,16 @@
 @extends('website.layout.app')
 @section('title','Article Details')
 @section('body')
-    <div class="container-fluid blog py-5" style="background-color: #2a2c2a">
-        <div class="container mt-5">
-            <h1>Gallery</h1>
+    <div class="container-fluid blog py-2" style="background-color: #2a2c2a">
+        <div class="container mt-3">
             <div class="row">
-{{--                @foreach($images as $image)--}}
-                    <div class="col-md-4 mb-4">
-                        <a href="#" class="image-link" data-image="https://picsum.photos/id/110/1200/800.webp" data-title="https://picsum.photos/id/110/1200/800.webp">
-                            <img src="https://picsum.photos/id/110/1200/800.webp" class="img-fluid" alt="https://picsum.photos/id/110/1200/800.webp">
+                @foreach($images as $image)
+                    <div class="col-md-4 mb-4"  style="object-fit: cover">
+                        <a href="#" class="image-link" data-image="{{asset($image->image)}}" data-title="{{$image->caption}}">
+                            <img src="{{asset($image->image)}}" style="width: 100%; height: 100%" class="img-fluid"  alt="{{$image->alt}}">
                         </a>
                     </div>
-                    <div class="col-md-4 mb-4">
-                            <a href="#" class="image-link" data-image="https://picsum.photos/id/177/480/320.webp" data-title="https://picsum.photos/id/110/1200/800.webp">
-                                <img src="https://picsum.photos/id/177/480/320.webp" class="img-fluid" alt="https://picsum.photos/id/110/1200/800.webp">
-                            </a>
-                        </div>
-
-{{--                @endforeach--}}
+                @endforeach
             </div>
         </div>
         <!-- Lightbox Modal -->
@@ -25,12 +18,12 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="lightboxModalLabel">Image</h5>
+
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
                         <img id="lightboxImage" src="" class="img-fluid" alt="">
-                        <p id="lightboxTitle" class="mt-2"></p>
+                        <p id="lightboxTitle" class="mt-2 fw-bold text-black"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

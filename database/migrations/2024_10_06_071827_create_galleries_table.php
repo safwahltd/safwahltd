@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('title')->nullable();
+            $table->text('caption')->nullable();
             $table->text('image');
+            $table->text('size');
+            $table->text('resolution');
             $table->text('alt')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

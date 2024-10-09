@@ -2,49 +2,51 @@
 @section('title','Gallery')
 @section('body')
     <style>
-        .image-drop-area {
-            border: 2px dashed #ccc;
-            border-radius: 5px;
-            width: 100%;
-            padding: 20px;
-            text-align: center;
-            font-size: 16px;
-            color: #999;
-            margin: 20px 0;
-        }
-        .image-drop-area.dragover {
-            border-color: #000;
-            background-color: #f0f0f0;
-        }
-        .image-preview {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        .image-preview .image-container {
+        .image-preview-container {
             position: relative;
-            margin: 5px;
+            display: inline-block;
+            margin: 10px;
         }
-        .image-preview img {
+        .image-preview-container img {
             width: 100px;
             height: 100px;
+            border-radius: 5px;
             object-fit: cover;
-            border: 1px solid #ccc;
+            display: block;
         }
         .cancel-button {
             position: absolute;
-            top: -10px;
-            right: -10px;
-            background: red;
+            top: 5px;
+            right: 5px;
+            background-color: red;
             color: white;
             border: none;
             border-radius: 50%;
-            cursor: pointer;
             width: 20px;
             height: 20px;
+            font-size: 14px;
             text-align: center;
-            line-height: 16px;
-            font-size: 16px;
+            line-height: 18px;
+            cursor: pointer;
+        }
+        /* Hidden image info (initially hidden) */
+        .info-box {
+            display: none;
+            position: absolute;
+            /*bottom: 100%;
+            left: 50%;*/
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        /* Show the info box when hovering over the Info button */
+        .info-button:hover + .info-box {
+            display: block;
         }
     </style>
     <div class="row mt-1 row-sm">
@@ -64,6 +66,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        @foreach($images as $key => $image)
                         <div class="col-xl-3 col-md-6 col-sm-6 my-1">
                             <div class="card m-0 p-0 border">
                                 <div class="d-flex align-items-center px-3 pt-3">
@@ -74,54 +77,100 @@
                                     <div class="float-end ms-auto">
                                         <a href="#" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
                                         <div class="dropdown-menu dropdown-menu-start">
-                                            <a class="dropdown-item" href="#"><i class="fe fe-edit me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fe fe-share me-2"></i> Share</a>
-                                            <a class="dropdown-item" href="#"><i class="fe fe-download me-2"></i> Download</a>
-                                            <a class="dropdown-item" href="#"><i class="fe fe-info me-3"></i> Info</a>
-                                            <a class="dropdown-item" href="#"><i class="fe fe-trash me-2"></i> Delete</a>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editConcern{{$key}}" ><i class="fe fe-edit me-2"></i> Edit</a>
+                                            <a class="dropdown-item" href="{{ route('admin.gallery.download',$image->id) }}"><i class="fe fe-download me-2"></i> Download</a>
+                                            <a class="dropdown-item info-button" href="#"><i class="fe fe-info me-2"></i> Info</a>
+                                            <div class="info-box bg-dark">
+                                                <!-- Display the image details dynamically from the backend -->
+                                                <span>Title : {{ $image->title }}</span>
+                                                <br>
+                                                <span>Resolution : {{ $image->resolution }} px </span><br>
+                                                <span>Size: {{ number_format($image->size / 1024, 2) }} KB </span><br>
+                                                <span>Last Update : {{ $image->user->name }} {{ \Illuminate\Support\Carbon::parse($image->updated_at)->format('D m,Y h:i:s') }}</span>
+
+                                            </div>
+                                            <a class="dropdown-item" href="#" onclick="return confirm('are you sure to delete ?') ? document.getElementById('myForm{{$key}}').submit() : '' ">
+                                                <i class="fe fe-trash me-2"></i>
+                                                Delete
+                                            </a>
+                                            <form action="{{route('admin.gallery.destroy',$image->id)}}" method="post" id="myForm{{$key}}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body pt-0 text-center">
                                     <div class="">
-                                        <a href="#" class="image-link" data-image="https://picsum.photos/id/177/480/320.webp" data-title="https://picsum.photos/id/110/1200/800.webp">
-                                            <img src="https://picsum.photos/id/177/480/320.webp" class="img-fluid" alt="https://picsum.photos/id/110/1200/800.webp">
+                                        <a href="#" class="image-link" data-image="{{asset($image->image)}}" data-title="{{ $image->title }}">
+                                            <img src="{{asset($image->image)}}" class="img-fluid" style="height: 120px" alt="{{$image->alt}}">
                                         </a>
                                     </div>
-                                    <h6 class="mb-1 font-weight-semibold">Received</h6>
-                                    <span class="text-muted">1.23gb</span>
+                                    <span class="text-muted">{{ number_format($image->size / 1024, 2) }} KB</span>
+                                    <br>
+                                    <br>
+                                    <span class="text-muted p-1 my-2 rounded-2 {{ $image->status == 1 ? 'bg-success':'bg-danger'  }}  ">{{ $image->status == 1 ? 'Active':'Inactive'  }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6 col-sm-6 my-1">
-                            <div class="card m-0 p-0 border">
-                                <div class="d-flex align-items-center px-3 pt-3">
-                                    <label class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" name="example-checkbox2" value="option2">
-                                        <span class="custom-control-label"></span>
-                                    </label>
-                                    <div class="float-end ms-auto">
-                                        <a href="#" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
-                                        <div class="dropdown-menu dropdown-menu-start">
-                                            <a class="dropdown-item" href="#"><i class="fe fe-edit me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fe fe-share me-2"></i> Share</a>
-                                            <a class="dropdown-item" href="#"><i class="fe fe-download me-2"></i> Download</a>
-                                            <a class="dropdown-item" href="#"><i class="fe fe-info me-3"></i> Info</a>
-                                            <a class="dropdown-item" href="#"><i class="fe fe-trash me-2"></i> Delete</a>
+                            <div class="modal fade" id="editConcern{{$key}}">
+                                <div class="modal-dialog modal-dialog-centered task-view-modal" role="document">
+                                    <div class="modal-content modal-content-demo">
+                                        <div class="modal-header p-5">
+                                            <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="card">
+                                                <div class="card-header border-bottom justify-content-between">
+                                                    <h3 class="card-title"> Edit Concern</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form class="form-horizontal" action="{{route('admin.gallery.update',$image->id )}}" method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        @php($rand = rand(0,10))
+                                                        <div class="row mb-4">
+                                                            <div class="col-md-3 form-label">
+                                                                <label class="" for="b{{$rand}}">Images</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control image-input" value="{{ asset($image->image) }}" id="b{{$rand}}" name="image" type="file">
+                                                                <img class="img-fluid img-responsive my-2" id="imagePreview-b{{$rand}}" src="{{ asset($image->image) }}"
+                                                                     alt="Your Image" style="width: 150px; height: auto;" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4">
+                                                            <div class="col-md-3 form-label">
+                                                                <label class="" for="captionEdit{{$key}}">Caption</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <textarea class="form-control" name="caption" id="captionEdit{{$key}}" cols="30" rows="4">{{ $image->caption }}</textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-4 d-flex form-group">
+                                                            <div class="col-md-3 form-label">
+                                                                <label class="" for="statusAdd">Status</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <select class="form-control select2 form-select" id="statusAdd" name="status" data-placeholder="Choose one">
+                                                                    <option class="form-control" label="Choose one" disabled selected></option>
+                                                                    <option  {{$image->status == 1 ? 'selected':''}} value="1">Active</option>
+                                                                    <option  {{$image->status == 0 ? 'selected':''}} value="0">Inactive</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-primary float-end" type="submit">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body pt-0 text-center">
-                                    <div class="">
-                                        <a href="#" class="image-link" data-image="https://picsum.photos/id/110/1200/800.webp" data-title="https://picsum.photos/id/110/1200/800.webp">
-                                            <img src="https://picsum.photos/id/110/1200/800.webp" class="img-fluid" alt="https://picsum.photos/id/110/1200/800.webp">
-                                        </a>
-                                    </div>
-                                    <h6 class="mb-1 font-weight-semibold">Download</h6>
-                                    <span class="text-muted">1.23gb</span>
-                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -137,44 +186,26 @@
                 </div>
                 <div class="modal-body">
                     <div class="card">
-                        <div class="card-header border-bottom justify-content-between">
-                            <h3 class="card-title"> Create New</h3>
-                        </div>
                         <div class="card-body">
                             <form class="form-horizontal" action="{{route('admin.gallery.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-4">
-                                    <label for="titleAdd" class="col-md-3 form-label">Title</label>
-                                    <div class="col-md-9">
-                                        <input class="form-control" required value="{{old('title')}}" id="titleAdd" name="title" placeholder="Enter Title" type="text">
-                                        <span class="text-danger">{{$errors->has('title') ? $errors->first('title'):''}}</span>
+                                    <div class="col-md-3 form-label">
+                                        <label class="" for="imageInput">Images</label>
                                     </div>
-                                </div>
-                                <div class="row mb-4">
-                                    {{--<label for="bannerAdd" class="col-md-3 form-label">Images</label>
                                     <div class="col-md-9">
-                                        <input class="form-control dropify" multiple value="{{old('banner')}}" id="bannerAdd" name="banner" type="file">
-                                        <span class="text-danger">{{$errors->has('banner') ? $errors->first('banner'):''}}</span>
-                                    </div>--}}
-                                    <div id="imageDropArea" class="image-drop-area">
-                                        Drag & Drop images here or click to upload
+                                        <!-- File input for selecting multiple images -->
+                                        <input type="file" class="imageInput form-control " id="imageInput" name="images[]" multiple accept="image/*" />
+                                        <div class="imagePreview" id="imagePreview"></div>
                                     </div>
-                                    <input type="file" id="imageInput" name="image" multiple accept="image/*" style="display: none;" />
-                                    <div id="imagePreview" class="image-preview"></div>
 
                                 </div>
                                 <div class="row mb-4">
-                                    <label for="serialAdd" class="col-md-3 form-label">Serial <span class="text-danger">(optional)</span></label>
-                                    <div class="col-md-9">
-                                        <input class="form-control" value="{{old('serial')}}" id="serialAdd" name="serial" placeholder="Enter Serial No" type="number">
-                                        <span class="text-danger">{{$errors->has('serial') ? $errors->first('serial'):''}}</span>
+                                    <div class="col-md-3 form-label">
+                                        <label class="" for="captionAdd">Caption</label>
                                     </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label for="urlShow" class="col-md-3 form-label">Url</label>
                                     <div class="col-md-9">
-                                        <input class="form-control bg-transparent" value="{{ old('url') }}" id="urlShow" name="url" placeholder="Enter Url" type="url">
-                                        <span class="text-danger">{{$errors->has('url') ? $errors->first('url'):''}}</span>
+                                        <textarea class="form-control" name="caption" id="captionAdd" cols="30" rows="4"></textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-4 d-flex form-group">
@@ -268,66 +299,52 @@
     </script>
     <script>
         $(document).ready(function() {
-            const $imageDropArea = $('#imageDropArea');
-            const $imageInput = $('#imageInput');
-            const $imagePreview = $('#imagePreview');
-
-            // Handle dragover and dragleave events
-            $imageDropArea.on('dragover', function(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                $(this).addClass('dragover');
-            });
-
-            $imageDropArea.on('dragleave', function(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                $(this).removeClass('dragover');
-            });
-
-            // Handle drop event
-            $imageDropArea.on('drop', function(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                $(this).removeClass('dragover');
-                const files = event.originalEvent.dataTransfer.files;
-                handleImages(files);
-            });
-
-            // Handle click event to open the file input
-            $imageDropArea.on('click', function() {
-                $imageInput.click();
-            });
+            const $imageInput = $('.imageInput');
+            const $imagePreview = $('.imagePreview');
 
             // Handle file input change event
-            $imageInput.on('change', function() {
-                const files = this.files;
-                handleImages(files);
+            $imageInput.on('change', function(event) {
+                let files = event.target.files;
+                $imagePreview.empty(); // Clear previous previews
+                previewImages(files);
             });
 
-            // Function to process and preview images
-            function handleImages(files) {
-                $.each(files, function(index, file) {
+            // Preview selected images with cancel button
+            function previewImages(files) {
+                Array.from(files).forEach((file) => {
                     if (file.type.startsWith('image/')) {
                         const reader = new FileReader();
                         reader.onload = function(event) {
-                            const $imageContainer = $('<div class="image-container"></div>');
-                            const $img = $('<img>').attr('src', event.target.result);
-                            const $cancelButton = $('<button class="cancel-button">&times;</button>');
+                            const previewContainer = $('<div class="image-preview-container"></div>');
+                            const imgElement = $('<img src="' + event.target.result + '">');
+                            const cancelButton = $('<button class="cancel-button">&times;</button>');
 
-                            // Add click event to cancel button to remove image container
-                            $cancelButton.on('click', function() {
-                                $imageContainer.remove();
+                            // Cancel button removes the image from preview
+                            cancelButton.on('click', function() {
+                                previewContainer.remove();
+                                removeFile(file);
                             });
 
-                            $imageContainer.append($img).append($cancelButton);
-                            $imagePreview.append($imageContainer);
+                            previewContainer.append(imgElement).append(cancelButton);
+                            $imagePreview.append(previewContainer);
                         };
                         reader.readAsDataURL(file);
-                    } else {
-                        alert(file.name + " is not an image file.");
                     }
                 });
+            }
+
+            // Remove a file from the input
+            function removeFile(fileToRemove) {
+                const dt = new DataTransfer();
+                const files = $imageInput[0].files;
+
+                Array.from(files).forEach((file) => {
+                    if (file !== fileToRemove) {
+                        dt.items.add(file); // Add all files except the removed one
+                    }
+                });
+
+                $imageInput[0].files = dt.files; // Update file input
             }
         });
     </script>
