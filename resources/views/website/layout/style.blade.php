@@ -17,3 +17,6 @@
 
 <!-- Template Stylesheet -->
 <link href="{{asset('/')}}website/css/style.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+<link href="{{asset('/')}}owl-carousel/owl.carousel.min.css" rel="stylesheet">
+<link href="{{asset('/')}}owl-carousel/owl.theme.default.min.css" rel="stylesheet">

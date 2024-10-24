@@ -13,7 +13,7 @@
             <div class="carousel-inner" role="listbox">
                 @foreach($sliders as $key => $slider)
                 <div class="carousel-item {{$key == 0 ? 'active':''}}">
-                    <img src="{{asset($slider->banner)}}" class="img-fluid" alt="{{ $slider->title }}">
+                    <img src="{{asset($slider->banner)}}"  class="img-fluid" alt="{{ $slider->title }}">
                     <div class="carousel-caption">
                         <div class="container carousel-content">
                             <h6 class="text-white display-6 animated fadeInUp">{{ $slider->title }}</h6>
@@ -42,39 +42,6 @@
     </div>
     @endif
     <!-- Carousel End -->
-
-    {{--<!-- Fact Start -->
-    <div class="container-fluid bg-dark py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 wow fadeIn" data-wow-delay=".1s">
-                    <div class="d-flex counter">
-                        <h1 class="me-3 text-dark counter-value">99</h1>
-                        <h5 class="text-white mt-1">Success in getting happy customer</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 wow fadeIn" data-wow-delay=".3s">
-                    <div class="d-flex counter">
-                        <h1 class="me-3 text-dark counter-value">25</h1>
-                        <h5 class="text-white mt-1">Thousands of successful business</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 wow fadeIn" data-wow-delay=".5s">
-                    <div class="d-flex counter">
-                        <h1 class="me-3 text-dark counter-value">120</h1>
-                        <h5 class="text-white mt-1">Total clients who love HighTech</h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 wow fadeIn" data-wow-delay=".7s">
-                    <div class="d-flex counter">
-                        <h1 class="me-3 text-dark counter-value">5</h1>
-                        <h5 class="text-white mt-1">Stars reviews given by satisfied clients</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Fact End -->--}}
     <!-- About Start -->
     @if($about->status == 1)
     <div class="container-fluid py-5 my-5">
@@ -207,18 +174,24 @@
             <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
                 <h2 class="text-dark">Available On</h2>
             </div>
-            <div class="row g-5">
-                @foreach($shops as $shop)
-                    <div class="col-md-4 col-6 col-lg-2 mb-1 wow fadeIn" data-wow-delay=".3s">
-                        <div class="project-item">
-                            <div class="project-img">
-                                <a href="{{$shop->url}}" target="_blank" class="text-center">
-                                <img src="{{asset($shop->banner)}}" class="img-fluid w-100 rounded" alt="{{$shop->name}}">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="owl-carousel owl-theme">
+                        @foreach($shops as $shop)
+                            <div class="item">
+                                <a href="{{$shop->url}}">
+                                    <div class="bg-white" style="border: 1px solid black">
+                                        <div class="row">
+                                            <div class="d-flex justify-content-center">
+                                                <img class="mb-2 w-50 p-1 justify-content-center img-fluid rounded-2" src="{{asset($shop->banner)}}"  alt="{{$shop->name}}">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </a>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
     </div>
@@ -325,3 +298,38 @@
     </div>
     <!-- Contact End -->
 @endsection
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 2,
+                        nav: true,
+                        loop: true,
+                        autoplay:true,
+                        autoplayTimeout:3000,
+                    },
+                    600: {
+                        items: 3,
+                        nav: false,
+                        loop: true,
+                        autoplay:true,
+                        autoplayTimeout:3000,
+                    },
+                    1000: {
+                        items: 5,
+                        nav: true,
+                        loop: true,
+                        autoplay:true,
+                        autoplayTimeout:3000,
+                        margin: 20
+                    }
+                }
+            })
+        })
+    </script>
+@endpush
