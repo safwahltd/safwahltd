@@ -55,7 +55,7 @@
                                 <input type="text" name="name" required class="form-control border-0 py-3" placeholder="Name *">
                             </div>
                             <div class="mb-4">
-                                <input type="text" name="email" required class="form-control border-0 py-3" placeholder="Email *">
+                                <input type="text" name="email" class="form-control border-0 py-3" placeholder="Email">
                             </div>
                             <div class="mb-4">
                                 <input type="text" name="phone" required class="form-control border-0 py-3" placeholder="Phone *">

@@ -21,6 +21,7 @@ use App\Http\Controllers\website\ContactController;
 use App\Http\Controllers\WebsiteCMSController;
 use App\Http\Controllers\admin\PostPageLinkController;
 use App\Http\Controllers\admin\GalleryController;
+use App\Http\Controllers\admin\BlockedMailerController;
 
 
 /* Website Start*/
@@ -149,7 +150,12 @@ Route::middleware(['admin.auth'])->prefix('admin/')->group(function () {
     Route::put('/update-details-update',[AdminAuthController::class,'userDetailsUpdate'])->name('admin.user.details.update');
     Route::get('/update-password',[AdminAuthController::class,'userPasswordChange'])->name('admin.pass.change');
     Route::put('/update-password-submit',[AdminAuthController::class,'userPasswordChangeSubmit'])->name('admin.pass.update');
-
+    Route::controller(BlockedMailerController::class)->group(function () {
+        Route::get('/block-email','index')->name('admin.block.email.index');
+        Route::post('/block-email-store','store')->name('admin.block.email.store');
+        Route::put('/block-email-update/{id}','update')->name('admin.block.email.update');
+        Route::delete('/block-email-delete/{id}','destroy')->name('admin.block.email.destroy');
+    });
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 });
 /* Admin Panel End */

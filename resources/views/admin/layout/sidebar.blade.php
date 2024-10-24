@@ -163,7 +163,9 @@
                             @if(auth()->user()->hasPermission('admin pass change'))
                                 <li><a href="{{route('admin.pass.change')}}" class="slide-item text-white">Password Change</a></li>
                             @endif
-
+                            @if(auth()->user()->hasPermission('admin block email index'))
+                                <li><a href="{{route('admin.block.email.index')}}" class="slide-item text-white">Block Email</a></li>
+                            @endif
                         </ul>
                     </li>
                     @endif
