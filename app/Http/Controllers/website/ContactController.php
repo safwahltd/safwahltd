@@ -22,7 +22,7 @@ class ContactController extends Controller
 {
     public function contactSubmit(Request $request)
     {
-        if (RateLimiter::tooManyAttempts($request->ip(), 3)) {
+        if (RateLimiter::tooManyAttempts($request->ip(), 5)) {
             toastr()->error('Too many submissions. Please try again later.');
             return back();
         }
@@ -32,10 +32,11 @@ class ContactController extends Controller
         try {
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
-                'email' => 'email',
+                'email' => 'nullable | email:rfc,dns',
                 'phone' => 'required',
                 'subject' => 'required',
                 'message' => 'required',
+                'captcha' => 'required|captcha'
             ]);
             if ($validate->fails()){
                 toastr()->error($validate->messages());
@@ -74,7 +75,7 @@ class ContactController extends Controller
     }
     public function bulkOrderSubmit(Request $request)
     {
-        if (RateLimiter::tooManyAttempts($request->ip(), 3)) {
+        if (RateLimiter::tooManyAttempts($request->ip(), 5)) {
             toastr()->error('Too many submissions. Please try again later.');
             return back();
         }
@@ -84,10 +85,11 @@ class ContactController extends Controller
         try {
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
-                'email' => 'email',
+                'email' => 'nullable | email:rfc,dns',
                 'phone' => 'required',
                 'subject' => 'required',
                 'message' => 'required',
+                'captcha' => 'required|captcha'
             ]);
             if ($validate->fails()){
                 toastr()->error($validate->messages());
@@ -129,7 +131,7 @@ class ContactController extends Controller
     }
     public function becomeWholesalerSubmit(Request $request)
     {
-        if (RateLimiter::tooManyAttempts($request->ip(), 3)) {
+        if (RateLimiter::tooManyAttempts($request->ip(), 5)) {
             toastr()->error('Too many submissions. Please try again later.');
             return back();
         }
@@ -139,10 +141,11 @@ class ContactController extends Controller
         try {
             $validate = Validator::make($request->all(),[
                 'name' => 'required',
-                'email' => 'email',
+                'email' => 'nullable | email:rfc,dns',
                 'phone' => 'required',
                 'subject' => 'required',
                 'message' => 'required',
+                'captcha' => 'required|captcha'
             ]);
             if ($validate->fails()){
                 toastr()->error($validate->messages());

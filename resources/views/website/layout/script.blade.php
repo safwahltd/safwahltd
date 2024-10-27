@@ -79,3 +79,10 @@
 <!--End of Tawk.to Script-->--}}
 
 <script src="{{asset('/')}}owl-carousel/owl.carousel.js"></script>
+<script>
+    function reloadCaptcha() {
+        const captchaImage = document.querySelector('.captcha img');
+        captchaImage.src = "{{ \Mews\Captcha\Facades\Captcha::src('math') }}" + "&" + Date.now();
+    }
+</script>
+

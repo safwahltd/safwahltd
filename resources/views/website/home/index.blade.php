@@ -276,16 +276,24 @@
                                     <input type="text" name="name" required class="form-control border-0 py-3" placeholder="Name *">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="email" required class="form-control border-0 py-3" placeholder="Email *">
+                                    <input type="email" name="email" class="form-control border-0 py-3" placeholder="Email ">
                                 </div>
                                 <div class="mb-4">
-                                    <input type="text" name="phone" required class="form-control border-0 py-3" placeholder="Phone *">
+                                    <input type="number" name="phone" required class="form-control border-0 py-3" placeholder="Phone *">
                                 </div>
                                 <div class="mb-4">
                                     <input type="text" name="subject" required class="form-control border-0 py-3" placeholder="Subject *">
                                 </div>
                                 <div class="mb-4">
                                     <textarea name="message" required class="w-100 form-control border-0 py-3" rows="6" cols="10" placeholder="Message *"></textarea>
+                                </div>
+                                <div class="mb-4 captcha">
+                                    <label for="" class="">
+                                        {!! \Mews\Captcha\Facades\Captcha::img('math') !!}
+                                        <button type="button" onclick="reloadCaptcha()">Reload CAPTCHA</button>
+                                    </label>
+
+                                    <input class="form-control my-1 border-0 py-3" type="text" name="captcha" required placeholder="Enter The Code Show In Image">
                                 </div>
                                 <div class="text-start">
                                     <button class="btn bg-dark text-white py-3 px-5" type="submit">Send Message</button>
