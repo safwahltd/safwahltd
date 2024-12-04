@@ -72,10 +72,10 @@
                                     <button type="button" onclick="reloadCaptcha()">Reload CAPTCHA</button>
                                 </label>
 
-                                <input class="form-control my-1 border-0 py-3" type="text" name="captcha" required placeholder="Enter The Code Show In Image">
+                                <input class="form-control my-1 border-0 py-3" type="text" name="captcha" required placeholder="Enter the result from image">
                             </div>
                             <div class="text-start">
-                                <button class="btn bg-dark text-white py-3 px-5" type="submit">submit request</button>
+                                <button class="btn bg-dark text-white py-3 px-5" type="submit">Submit Request</button>
                             </div>
                         </div>
                     </form>
