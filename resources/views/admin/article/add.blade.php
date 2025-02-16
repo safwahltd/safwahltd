@@ -42,7 +42,12 @@
                                         <span class="text-danger">{{$errors->has('thumbnail') ? $errors->first('thumbnail'):''}}</span>
                                     </div>
                                 </div>
-
+                                <div class="row mb-4">
+                                    <label for="alt_textShow" class="col-md-3 form-label">Alt Text</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" value="{{ old('alt_text') }}" id="alt_textShow" name="alt_text" placeholder="Alt Text" type="text">
+                                    </div>
+                                </div>
                                 <div class="row mb-4">
                                     <label for="short_descriptionAdd" class="col-md-3 form-label">Short Description</label>
                                     <div class="col-md-9">
@@ -70,6 +75,24 @@
                                     <div class="col-md-9">
                                         <input class="form-control bg-transparent" value="{{ old('url') }}" id="urlShow" name="url" placeholder="Enter Url" type="url">
                                         <span class="text-danger">{{$errors->has('url') ? $errors->first('url'):''}}</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="meta_titleShow" class="col-md-3 form-label">Meta Title</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control bg-transparent" value="{{ old('meta_title') }}" id="meta_titleShow" name="meta_title" placeholder="Meta Title" type="text">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="meta_keywordShow" class="col-md-3 form-label">Meta Keyword</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control bg-transparent" value="{{ old('meta_keyword') }}" id="meta_keywordShow" name="meta_keyword" placeholder="Meta Keyword" type="text">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="meta_descriptionShow" class="col-md-3 form-label">Meta Description</label>
+                                    <div class="col-md-9">
+                                        <textarea class="form-control bg-transparent" name="meta_description" id="meta_descriptionShow" cols="30" rows="5">{{ old('meta_description') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-4 d-flex form-group">

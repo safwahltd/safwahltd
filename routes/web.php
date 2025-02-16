@@ -39,7 +39,7 @@ Route::get('/gallery', [GalleryController::class, 'gallery'])->name('website.gal
 
 /* Website End*/
 /* Admin Panel Start */
-Route::get('/login',[AdminAuthController::class,'login'])->name('admin.login');
+Route::get('/admin-login',[AdminAuthController::class,'login'])->name('admin.login');
 Route::post('/admin/login-confirm', [AdminAuthController::class, 'loginConfirm'])->name('admin.login.confirm');
 Route::middleware(['admin.auth'])->prefix('admin/')->group(function () {
     Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');

@@ -13,7 +13,7 @@ class PostPageLinkController extends Controller
 {
     public function index(){
         $postPageLinks = PostPageLink::latest()->paginate(20);
-        $articles = Article::orderBy('title','asc')->where('url',null)->where('status',1)->get();
+        $articles = Article::orderBy('title','asc')->where('status',1)->get();
         return view('admin.post-page-link.index',compact('articles','postPageLinks'));
     }
     public function store(Request $request){

@@ -20,8 +20,8 @@
                     <a href="{{route('bulk.order')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='bulk.order' ? 'background-color: #a89a9a':''}}; font-size: 17px">BULK ORDER</a>
                     <a href="{{route('become.wholesaler')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='become.wholesaler' ? 'background-color: #a89a9a':''}}; font-size: 17px">BECOME WHOLESALER</a>
                     <a href="{{route('website.contact')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.contact' ? 'background-color: #a89a9a':''}}; font-size: 17px">CONTACT</a>
-                    <a href="{{route('website.gallery')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.gallery' ? 'background-color: #a89a9a':''}}; font-size: 17px">GALLERY</a>
-{{--                    <a href="{{route('website.contact')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.contact' ? 'background-color: #a89a9a':''}}; font-size: 17px">LOGIN</a>--}}
+{{--                    <a href="{{route('website.gallery')}}" class="nav-item nav-link text-dark" style="{{ \Illuminate\Support\Facades\Request::route()->getName() =='website.gallery' ? 'background-color: #a89a9a':''}}; font-size: 17px">GALLERY</a>--}}
+                    <a href="https://hrm.safwahltd.com" class="nav-item nav-link text-dark" style="font-size: 17px">LOGIN</a>
                 </div>
             </div>
 

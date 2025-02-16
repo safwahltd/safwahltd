@@ -34,8 +34,8 @@ class WebsiteController extends Controller
     }
     public function articleDetails($slug){
         $article = Article::where('slug',$slug)->where('status',1)->first();
-        $articles = Article::whereNotIn('id',[$article->id])->get()->take(10);
-        $links = PostPageLink::where('article_id',$article->id)->get();
+        $articles = Article::whereNotIn('id',[$article->id])->where('status',1)->get()->take(10);
+        $links = PostPageLink::where('article_id',$article->id)->where('status',1)->get();
         return view('website.article.article-details',compact('article','articles','links'));
     }
     public function bulkOrder(){
