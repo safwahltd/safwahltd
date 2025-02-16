@@ -10,6 +10,7 @@
     <meta content="{{$company->meta_keyword}}" name="keywords">
     <meta content="{{$company->meta_author}}" name="author">
     <meta content="{{$company->meta_description}}" name="description">
+    @stack('meta')
 
    @include('website.layout.style')
 </head>

@@ -74,6 +74,10 @@ class ArticleController extends Controller
             }
 
             $article->url = $request->url;
+            $article->alt_text = $request->alt_text;
+            $article->meta_title = $request->meta_title;
+            $article->meta_keyword = $request->meta_keyword;
+            $article->meta_description = $request->meta_description;
             $article->status = $request->status;
             $article->save();
             toastr()->success('Article Create Successfully.');
@@ -152,10 +156,14 @@ class ArticleController extends Controller
                 }
             }
             $article->url = $request->url;
+            $article->alt_text = $request->alt_text;
+            $article->meta_title = $request->meta_title;
+            $article->meta_keyword = $request->meta_keyword;
+            $article->meta_description = $request->meta_description;
             $article->status = $request->status;
             $article->save();
             toastr()->success('Article Update Successfully.');
-            return redirect()->route('admin.article.index');
+            return back();
         }
         catch(Exception $e){
             toastr()->error($e->getMessage());

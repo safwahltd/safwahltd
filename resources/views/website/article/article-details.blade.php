@@ -1,5 +1,9 @@
 @extends('website.layout.app')
 @section('title','Article Details')
+@push('meta')<meta name="meta_title" content="{{$article->meta_title}}">
+    <meta name="meta_keywords" content="{{$article->meta_keyword}}">
+    <meta name="meta_description" content="{{$article->meta_description}}">
+@endpush
 @section('body')
     <style>
         .article-details {
@@ -53,7 +57,7 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-3 d-grid justify-content-between align-content-center">
-                                                    <img src="{{asset($article->thumbnail)}}" width="80" alt="{{$article->title}}">
+                                                    <img src="{{asset($article->thumbnail)}}" width="80" alt="{{$article->alt_text}}">
                                                 </div>
                                                 <div class="col-9"><p style="font-family: Times New Roman, Times, serif;">{{$article->title}}</p></div>
                                             </div>
